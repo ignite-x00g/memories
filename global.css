@@ -18,6 +18,14 @@ body.dark {
   background: linear-gradient(135deg, #191632 0%, #1a1930 100%);
   color: #fafbfe;
 }
+
+/* Modal drag styles */
+.ops-modal.dragging {
+  opacity: 0.95;
+  cursor: move;
+  transition: none;
+}
+
 /* NAV */
 .ops-nav {
   width: 100%;
