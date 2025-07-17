@@ -46,9 +46,9 @@ const modalData = {
     ]
   },
   business: {
-    title: "Sobre Operaciones Empresariales",
+    title: "Sobre Gestion",
     img: "img/business.jpg",
-    imgAlt: "Operaciones Empresariales",
+    imgAlt: "Gestion",
     content: `Contenido detallado sobre nuestros servicios de Operaciones Empresariales. Ayudamos a optimizar sus procesos, mejorar la eficiencia e impulsar el crecimiento mediante el apoyo operativo estratégico. Las áreas clave incluyen la optimización de procesos, la gestión de la cadena de suministro y el aseguramiento de la calidad.`,
     video: "Video placeholder",
     list: [
