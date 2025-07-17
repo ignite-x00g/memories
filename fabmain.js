@@ -26,8 +26,15 @@ fetch('fabs.html').then(r => r.text()).then(html => {
   }, true);
 
   // Lang/Theme toggles via events
-  document.getElementById('mobile-lang-toggle').onclick = () =>
-    window.dispatchEvent(new Event('toggle-lang'));
-  document.getElementById('mobile-theme-toggle').onclick = () =>
-    window.dispatchEvent(new Event('toggle-theme'));
+  document.getElementById('mobile-lang-toggle').onclick = () => {
+    const btn = document.getElementById('lang-toggle');
+    btn.textContent = btn.textContent === 'ES' ? 'EN' : 'ES';
+    document.getElementById('mobile-lang-toggle').textContent = btn.textContent;
+  }
+  document.getElementById('mobile-theme-toggle').onclick = () => {
+    document.body.classList.toggle('dark');
+    const t = document.getElementById('theme-toggle');
+    t.textContent = document.body.classList.contains('dark') ? 'Light' : 'Dark';
+    document.getElementById('mobile-theme-toggle').textContent = t.textContent;
+  }
 });

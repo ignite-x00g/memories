@@ -36,6 +36,10 @@ body.dark {
   justify-content: space-between;
   padding: 1.2rem 2rem;
   background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 .ops-nav .ops-logo {
   font-weight: bold;
