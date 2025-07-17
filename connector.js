@@ -129,6 +129,24 @@ export function openModal(type, isFab = false) {
   }
 }
 
+// Global toggles (all files listen to these events)
+window.addEventListener('toggle-lang', () => {
+  const btn = document.getElementById('lang-toggle');
+  btn.textContent = btn.textContent === 'ES' ? 'EN' : 'ES';
+  const mobileBtn = document.getElementById('mobile-lang-toggle');
+  if (mobileBtn) {
+    mobileBtn.textContent = btn.textContent;
+  }
+});
+window.addEventListener('toggle-theme', () => {
+  document.body.classList.toggle('dark');
+  const t = document.getElementById('theme-toggle');
+  t.textContent = document.body.classList.contains('dark') ? 'Light' : 'Dark';
+  const mobileT = document.getElementById('mobile-theme-toggle');
+  if (mobileT) {
+    mobileT.textContent = t.textContent;
+  }
+});
 
 // --- Draggable logic ---
 function makeModalDraggable(modal) {

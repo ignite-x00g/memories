@@ -302,6 +302,16 @@ footer {
   border-radius: 14px 14px 0 0;
 }
 
+/* FABs */
+.fab-stack {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 /* Responsive */
 @media (max-width: 900px) {
   .fab-stack { display: none; }
