@@ -106,6 +106,7 @@ const translations = {
     ]
   }
 };
+
 // Modal content data (all services, DRY, NIST-style compliance)
 const modalData = {
   professionals: {
