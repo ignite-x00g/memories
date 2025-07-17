@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>OPS Online Support • Structure Prototype</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="global.css">
+  <!-- Font Awesome Pro 6 -->
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css">
+</head>
+<body>
+  <!-- NAVIGATION -->
+  <nav class="ops-nav">
+    <span class="ops-logo">OPS</span>
+    <div class="nav-links">
+      <a href="business.html" class="nav-link">Business Operations</a>
+      <a href="contactcenter.html" class="nav-link">Contact Center</a>
+      <a href="itsupport.html" class="nav-link">IT Support</a>
+      <a href="professionals.html" class="nav-link">Professionals</a>
+    </div>
+    <div class="toggles">
+      <button class="toggle-btn" id="lang-toggle">ES</button>
+      <button class="toggle-btn" id="theme-toggle">Dark</button>
+    </div>
+  </nav>
+
+  <!-- CARD GRID -->
+  <main>
+    <div class="grid-container">
+      <div class="card" id="card-business">
+        <div class="title">Business Operations</div>
+        <div class="icon"><i class="fa-thin fa-briefcase"></i></div>
+        <div class="content">
+          <p>Streamline your processes, maximize efficiency, ensure compliance, and scale your business with precision.</p>
+        </div>
+      </div>
+      <div class="card" id="card-contactcenter">
+        <div class="title">Contact Center</div>
+        <div class="icon"><i class="fa-thin fa-headset"></i></div>
+        <div class="content">
+          <p>Enhance customer engagement with multilingual, multichannel support—24/7, data-driven, and empathetic.</p>
+        </div>
+      </div>
+      <div class="card" id="card-itsupport">
+        <div class="title">IT Support</div>
+        <div class="icon"><i class="fa-thin fa-laptop-code"></i></div>
+        <div class="content">
+          <p>Proactive, secure, real-time tech help, cloud management, and cyber defense for every business size.</p>
+        </div>
+      </div>
+      <div class="card" id="card-professionals">
+        <div class="title">Professionals</div>
+        <div class="icon"><i class="fa-thin fa-user-tie"></i></div>
+        <div class="content">
+          <p>OPS-vetted talent for IT, HR, projects, finance—contract or full-time, ready when you are.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FABs loaded via fabs.html -->
+  <div id="fab-root"></div>
+
+  <!-- Modals loaded dynamically via JS -->
+
+  <footer>
+    © 2025 OPS Online Support
+  </footer>
+
+  <script src="main.js"></script>
+  <script src="connector.js"></script>
+</body>
+</html>
