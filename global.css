@@ -87,10 +87,20 @@ body.dark {
   background: var(--clr-accent);
 }
 /* Cards Grid */
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  width: 100%;
+}
+
 .grid-container {
   width: min(75rem, 100%);
   margin-inline: auto;
-  margin-top: 2.8rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
   gap: 1.5rem;

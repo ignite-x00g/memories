@@ -129,7 +129,6 @@ export function openModal(type, isFab = false) {
   }
 }
 
-
 // Global toggles (all files listen to these events)
 window.addEventListener('toggle-lang', () => {
   const btn = document.getElementById('lang-toggle');
