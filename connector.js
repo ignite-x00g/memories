@@ -1,7 +1,5 @@
 // connector.js
 
-import { openFabModal } from './fabmain.js';
-
 // Modal content data (all services, DRY, NIST-style compliance)
 const modalData = {
   professionals: {
@@ -48,9 +46,9 @@ const modalData = {
     ]
   },
   business: {
-    title: "Sobre Operaciones Empresariales",
+    title: "Sobre Gestion",
     img: "img/business.jpg",
-    imgAlt: "Operaciones Empresariales",
+    imgAlt: "Gestion",
     content: `Contenido detallado sobre nuestros servicios de Operaciones Empresariales. Ayudamos a optimizar sus procesos, mejorar la eficiencia e impulsar el crecimiento mediante el apoyo operativo estratégico. Las áreas clave incluyen la optimización de procesos, la gestión de la cadena de suministro y el aseguramiento de la calidad.`,
     video: "Video placeholder",
     list: [
@@ -64,43 +62,60 @@ const modalData = {
 };
 
 // Central modal render function
-export function openModal(type) {
+export function openModal(type, isFab = false) {
   // Remove existing modal if present
   let old = document.getElementById('ops-modal-backdrop');
   if (old) old.remove();
 
-  // Modal markup
-  const data = modalData[type];
-  if (!data) return;
   const modal = document.createElement('div');
   modal.className = 'modal-backdrop';
   modal.id = 'ops-modal-backdrop';
-  modal.innerHTML = `
-    <div class="ops-modal" tabindex="-1" role="dialog" aria-modal="true">
-      <button class="modal-x" aria-label="CERRAR" id="modal-x">X</button>
-      <div class="modal-header">
-        <img class="modal-img" src="${data.img}" alt="${data.imgAlt}" />
-        <div>
-          <div class="modal-title">${data.title}</div>
+
+  if (isFab) {
+    let content = '';
+    if (type === 'join') {
+      content = `<iframe src="join.html" frameborder="0" class="fab-modal-iframe"></iframe>`;
+    } else if (type === 'contact') {
+      content = `<iframe src="contact.html" frameborder="0" class="fab-modal-iframe"></iframe>`;
+    } else if (type === 'chat') {
+      content = `<iframe src="chat.html" frameborder="0" class="fab-modal-iframe"></iframe>`;
+    }
+    modal.innerHTML = `
+      <div class="ops-modal" style="max-width:640px; width:96vw; height:560px;">
+        <button class="modal-x" aria-label="CERRAR" id="fab-modal-x">X</button>
+        ${content}
+      </div>
+    `;
+  } else {
+    const data = modalData[type];
+    if (!data) return;
+    modal.innerHTML = `
+      <div class="ops-modal" tabindex="-1" role="dialog" aria-modal="true" id="draggable-modal" style="top:12vh; left:0; right:0; margin:auto; position:fixed;">
+        <button class="modal-x" aria-label="CERRAR" id="modal-x">X</button>
+        <div class="modal-header" style="cursor:move; user-select:none;">
+          <img class="modal-img" src="${data.img}" alt="${data.imgAlt}" />
+          <div><div class="modal-title">${data.title}</div></div>
+        </div>
+        <div class="modal-content">${data.content}</div>
+        <div class="modal-video">${data.video}</div>
+        <ul style="margin-bottom:1.2em; margin-left:1.3em;">
+          ${data.list.map(i => `<li>${i}</li>`).join("")}
+        </ul>
+        <div class="modal-actions">
+          <button class="modal-btn">Learn More</button>
+          <button class="modal-btn">Ask Chattia</button>
+          <button class="modal-btn cta" onclick="window.location.href='contact.html'">Contact Us</button>
+          <button class="modal-btn" id="cancel-btn">Cancel</button>
         </div>
       </div>
-      <div class="modal-content">${data.content}</div>
-      <div class="modal-video">${data.video}</div>
-      <ul style="margin-bottom:1.2em; margin-left:1.3em;">
-        ${data.list.map(i => `<li>${i}</li>`).join("")}
-      </ul>
-      <div class="modal-actions">
-        <button class="modal-btn">Learn More</button>
-        <button class="modal-btn">Ask Chattia</button>
-        <button class="modal-btn cta" onclick="window.location.href='contact.html'">Contact Us</button>
-      </div>
-    </div>
-  `;
+    `;
+  }
+
   document.body.appendChild(modal);
 
   // Trap focus, close events
   const closeModal = () => modal.remove();
-  modal.querySelector('.modal-x').onclick = closeModal;
+  modal.querySelector('.modal-x, #fab-modal-x, #cancel-btn').onclick = closeModal;
   modal.onclick = e => (e.target === modal ? closeModal() : null);
   document.addEventListener('keydown', function esc(e) {
     if (e.key === "Escape") {
@@ -108,21 +123,71 @@ export function openModal(type) {
       document.removeEventListener('keydown', esc);
     }
   });
+
+  if (!isFab) {
+    makeModalDraggable(document.getElementById('draggable-modal'));
+  }
 }
+
 
 // Global toggles (all files listen to these events)
 window.addEventListener('toggle-lang', () => {
   const btn = document.getElementById('lang-toggle');
   btn.textContent = btn.textContent === 'ES' ? 'EN' : 'ES';
-  document.getElementById('mobile-lang-toggle').textContent = btn.textContent;
+  const mobileBtn = document.getElementById('mobile-lang-toggle');
+  if (mobileBtn) {
+    mobileBtn.textContent = btn.textContent;
+  }
 });
 window.addEventListener('toggle-theme', () => {
   document.body.classList.toggle('dark');
   const t = document.getElementById('theme-toggle');
   t.textContent = document.body.classList.contains('dark') ? 'Light' : 'Dark';
-  document.getElementById('mobile-theme-toggle').textContent = t.textContent;
+  const mobileT = document.getElementById('mobile-theme-toggle');
+  if (mobileT) {
+    mobileT.textContent = t.textContent;
+  }
 });
 
-// FAB/Accordion nav - loaded separately via fabs.html and fabmain.js
+// --- Draggable logic ---
+function makeModalDraggable(modal) {
+  const header = modal.querySelector('.modal-header');
+  let offsetX = 0, offsetY = 0, startX = 0, startY = 0, dragging = false;
 
-export { openFabModal };
+  header.addEventListener('mousedown', dragStart, false);
+  header.addEventListener('touchstart', dragStart, false);
+
+  function dragStart(e) {
+    dragging = true;
+    modal.classList.add('dragging');
+    startX = (e.touches ? e.touches[0].clientX : e.clientX) - modal.offsetLeft;
+    startY = (e.touches ? e.touches[0].clientY : e.clientY) - modal.offsetTop;
+    document.addEventListener('mousemove', dragMove, false);
+    document.addEventListener('mouseup', dragEnd, false);
+    document.addEventListener('touchmove', dragMove, false);
+    document.addEventListener('touchend', dragEnd, false);
+    e.preventDefault();
+  }
+
+  function dragMove(e) {
+    if (!dragging) return;
+    let x = (e.touches ? e.touches[0].clientX : e.clientX) - startX;
+    let y = (e.touches ? e.touches[0].clientY : e.clientY) - startY;
+    // Limit to viewport
+    x = Math.max(10, Math.min(x, window.innerWidth - modal.offsetWidth - 10));
+    y = Math.max(10, Math.min(y, window.innerHeight - modal.offsetHeight - 10));
+    modal.style.left = x + 'px';
+    modal.style.top = y + 'px';
+    modal.style.right = 'auto'; // Prevent centering override
+    modal.style.margin = 0;
+  }
+
+  function dragEnd(e) {
+    dragging = false;
+    modal.classList.remove('dragging');
+    document.removeEventListener('mousemove', dragMove, false);
+    document.removeEventListener('mouseup', dragEnd, false);
+    document.removeEventListener('touchmove', dragMove, false);
+    document.removeEventListener('touchend', dragEnd, false);
+  }
+}
