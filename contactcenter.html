@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact Center • OPS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="global.css">
+</head>
+<body>
+  <nav class="ops-nav">
+    <span class="ops-logo">OPS</span>
+    <div class="nav-links">
+      <a href="business.html" class="nav-link">Business Operations</a>
+      <a href="contactcenter.html" class="nav-link active">Contact Center</a>
+      <a href="itsupport.html" class="nav-link">IT Support</a>
+      <a href="professionals.html" class="nav-link">Professionals</a>
+    </div>
+    <div class="toggles">
+      <button class="toggle-btn" id="lang-toggle">ES</button>
+      <button class="toggle-btn" id="theme-toggle">Dark</button>
+    </div>
+  </nav>
+  <main style="max-width:680px; margin:3em auto;">
+    <h1 style="text-transform:uppercase;">Contact Center</h1>
+    <p>
+      Explore nuestras soluciones integrales de Centro de Contacto diseñadas para mejorar la satisfacción y el compromiso del cliente en todos los puntos de contacto.
+      <br>
+      <strong>Incluye:</strong>
+    </p>
+    <ul>
+      <li>Gestión de llamadas entrantes y salientes 24/7</li>
+      <li>Soporte por chat y correo electrónico en varios idiomas</li>
+      <li>Integración con plataformas CRM (HubSpot, Salesforce...)</li>
+      <li>Interacción en redes sociales y seguimiento de sentimiento</li>
+      <li>Análisis de experiencia del cliente y monitoreo de calidad</li>
+    </ul>
+    <div class="modal-actions" style="margin-top:2.2em;">
+      <button class="modal-btn cta" id="contactcenter-modal-btn">Ver Vista Previa del Servicio</button>
+    </div>
+  </main>
+  <div id="fab-root"></div>
+  <footer>© 2025 OPS Online Support</footer>
+  <script src="main.js"></script>
+  <script src="connector.js"></script>
+  <script src="fabmain.js"></script>
+  <script>
+    document.getElementById('contactcenter-modal-btn').onclick = function() {
+      // Modal markup: Contact Center preview
+      let old = document.getElementById('ops-modal-backdrop');
+      if (old) old.remove();
+      const modal = document.createElement('div');
+      modal.className = 'modal-backdrop';
+      modal.id = 'ops-modal-backdrop';
+      modal.innerHTML = `
+        <div class="ops-modal" tabindex="-1" role="dialog" aria-modal="true">
+          <button class="modal-x" aria-label="CERRAR" id="modal-x">X</button>
+          <div class="modal-header">
+            <img class="modal-img" src="img/contactcenter.jpg" alt="Centro de Contacto" />
+            <div>
+              <div class="modal-title">SOBRE EL CENTRO DE CONTACTO</div>
+            </div>
+          </div>
+          <div class="modal-content">
+            Explore nuestras soluciones integrales de Centro de Contacto diseñadas para mejorar la satisfacción y el compromiso del cliente en todos los puntos de contacto. Ofrecemos servicios de llamadas entrantes y salientes, soporte multicanal (correo electrónico, chat, redes sociales) y análisis avanzados.
+          </div>
+          <div class="modal-video">Video placeholder</div>
+          <ul style="margin-bottom:1.2em; margin-left:1.3em;">
+            <li>Gestión de llamadas entrantes y salientes 24/7</li>
+            <li>Soporte por chat y correo electrónico en varios idiomas</li>
+            <li>Integración con plataformas CRM (por ejemplo, HubSpot, Salesforce)</li>
+            <li>Interacción en redes sociales y seguimiento de sentimiento</li>
+            <li>Análisis de experiencia del cliente y monitoreo de calidad</li>
+          </ul>
+          <div class="modal-actions">
+            <button class="modal-btn">Learn More</button>
+            <button class="modal-btn">Ask Chattia</button>
+            <button class="modal-btn cta" id="cta-contactcenter-contact">Contact Us</button>
+            <button class="modal-btn" id="cancel-btn">Cancel</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+      function closeModal() { modal.remove(); }
+      modal.querySelector('.modal-x').onclick = closeModal;
+      modal.onclick = e => (e.target === modal ? closeModal() : null);
+      document.getElementById('cancel-btn').onclick = closeModal;
+      document.getElementById('cta-contactcenter-contact').onclick = () => window.parent ? window.parent.postMessage({action:'open-contact-fab'},'*') : window.location.href='contact.html';
+      document.addEventListener('keydown', function esc(e) {
+        if (e.key === "Escape") {
+          closeModal();
+          document.removeEventListener('keydown', esc);
+        }
+      });
+    };
+  </script>
+</body>
+</html>
