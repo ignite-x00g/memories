@@ -81,13 +81,13 @@ export function openModal(type) {
       <div class="modal-header">
         <img class="modal-img" src="${data.img}" alt="${data.imgAlt}" />
         <div>
-          <div class="modal-title">${data.title}</div>
+            <div class="modal-title" data-lang-en="${data.title}" data-lang-es="${data.title}">${data.title}</div>
         </div>
       </div>
-      <div class="modal-content">${data.content}</div>
+        <div class="modal-content" data-lang-en="${data.content}" data-lang-es="${data.content}">${data.content}</div>
       <div class="modal-video">${data.video}</div>
       <ul style="margin-bottom:1.2em; margin-left:1.3em;">
-        ${data.list.map(i => `<li>${i}</li>`).join("")}
+          ${data.list.map(i => `<li data-lang-en="${i}" data-lang-es="${i}">${i}</li>`).join("")}
       </ul>
       <div class="modal-actions">
         <button class="modal-btn">Learn More</button>
@@ -113,8 +113,20 @@ export function openModal(type) {
 // Global toggles (all files listen to these events)
 window.addEventListener('toggle-lang', () => {
   const btn = document.getElementById('lang-toggle');
-  btn.textContent = btn.textContent === 'ES' ? 'EN' : 'ES';
-  document.getElementById('mobile-lang-toggle').textContent = btn.textContent;
+  const lang = btn.textContent === 'ES' ? 'en' : 'es';
+  btn.textContent = lang === 'es' ? 'EN' : 'ES';
+  const mobileBtn = document.getElementById('mobile-lang-toggle');
+  if (mobileBtn) {
+    mobileBtn.textContent = btn.textContent;
+  }
+
+  const elements = document.querySelectorAll('[data-lang-en], [data-lang-es]');
+  elements.forEach(el => {
+    const text = el.getAttribute(`data-lang-${lang}`);
+    if (text) {
+      el.textContent = text;
+    }
+  });
 });
 window.addEventListener('toggle-theme', () => {
   document.body.classList.toggle('dark');
