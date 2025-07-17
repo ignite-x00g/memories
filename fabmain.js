@@ -8,12 +8,12 @@ fetch('fabs.html').then(r => r.text()).then(html => {
   // DESKTOP FAB triggers
   document.getElementById('fab-join').onclick = () => openModal('join', true);
   document.getElementById('fab-contact').onclick = () => openModal('contact', true);
-  document.getElementById('fab-chat').onclick = () => openModal('chat', true);
+  document.getElementById('fab-chat').onclick = () => openModal('chat');
 
   // MOBILE FAB triggers
   document.getElementById('mobile-fab-join').onclick = () => openModal('join', true);
   document.getElementById('mobile-fab-contact').onclick = () => openModal('contact', true);
-  document.getElementById('mobile-fab-chat').onclick = () => openModal('chat', true);
+  document.getElementById('mobile-fab-chat').onclick = () => openModal('chat');
 
   // Accordion nav open/close logic
   const accordionBtn = document.getElementById('mobile-fab-services');

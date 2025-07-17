@@ -15,6 +15,9 @@ const translations = {
     "it-support-content": "Proactive, secure, real-time tech help, cloud management, and cyber defense for every business size.",
     "professionals-title": "Professionals",
     "professionals-content": "OPS-vetted talent for IT, HR, projects, finance—contract or full-time, ready when you are.",
+    "fab-join": "Join Us",
+    "fab-contact": "Contact Us",
+    "fab-chat": "Chat",
     "modal-title-business": "About Business Operations",
     "modal-content-business": "Detailed content about our Business Operations services. We help optimize your processes, improve efficiency, and drive growth through strategic operational support. Key areas include process optimization, supply chain management, and quality assurance.",
     "modal-list-business": [
@@ -67,6 +70,9 @@ const translations = {
     "it-support-content": "Ayuda técnica proactiva, segura y en tiempo real, gestión de la nube y ciberdefensa para empresas de todos los tamaños.",
     "professionals-title": "Profesionales",
     "professionals-content": "Talento investigado por OPS para TI, recursos humanos, proyectos, finanzas, por contrato o a tiempo completo, listo cuando usted lo esté.",
+    "fab-join": "Únete a nosotros",
+    "fab-contact": "Contáctanos",
+    "fab-chat": "Chat",
     "modal-title-business": "Sobre Operaciones de Negocio",
     "modal-content-business": "Contenido detallado sobre nuestros servicios de Operaciones de Negocio. Ayudamos a optimizar sus procesos, mejorar la eficiencia e impulsar el crecimiento mediante el apoyo operativo estratégico. Las áreas clave incluyen la optimización de procesos, la gestión de la cadena de suministro y el aseguramiento de la calidad.",
     "modal-list-business": [
