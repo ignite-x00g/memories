@@ -1,5 +1,112 @@
 // connector.js
 
+const translations = {
+  en: {
+    "home": "Home",
+    "business-ops": "Business Operations",
+    "contact-center": "Contact Center",
+    "it-support": "IT Support",
+    "professionals": "Professionals",
+    "business-ops-title": "Business Operations",
+    "business-ops-content": "Streamline your processes, maximize efficiency, ensure compliance, and scale your business with precision.",
+    "contact-center-title": "Contact Center",
+    "contact-center-content": "Enhance customer engagement with multilingual, multichannel support—24/7, data-driven, and empathetic.",
+    "it-support-title": "IT Support",
+    "it-support-content": "Proactive, secure, real-time tech help, cloud management, and cyber defense for every business size.",
+    "professionals-title": "Professionals",
+    "professionals-content": "OPS-vetted talent for IT, HR, projects, finance—contract or full-time, ready when you are.",
+    "modal-title-business": "About Business Operations",
+    "modal-content-business": "Detailed content about our Business Operations services. We help optimize your processes, improve efficiency, and drive growth through strategic operational support. Key areas include process optimization, supply chain management, and quality assurance.",
+    "modal-list-business": [
+      "Workflow digitization and automation",
+      "Logistics and inventory efficiency strategies",
+      "Risk and compliance frameworks (aligned to NIST, ISO, CISA)",
+      "Performance metrics dashboards and analysis",
+      "Remote training and Lean operations"
+    ],
+    "modal-title-contactcenter": "About the Contact Center",
+    "modal-content-contactcenter": "Explore our comprehensive Contact Center solutions designed to enhance customer satisfaction and engagement across all touchpoints. We offer inbound and outbound call services, multichannel support (email, chat, social media), and advanced analytics.",
+    "modal-list-contactcenter": [
+      "24/7 inbound and outbound call management",
+      "Multilingual chat and email support",
+      "CRM platform integration (e.g., HubSpot, Salesforce)",
+      "Social media engagement and sentiment tracking",
+      "Customer experience analytics and quality monitoring"
+    ],
+    "modal-title-itsupport": "About IT Support",
+    "modal-content-itsupport": "Our IT Support services provide reliable and timely assistance to keep your systems running smoothly and securely. Services include help desk support, network monitoring, cybersecurity services, and cloud infrastructure management.",
+    "modal-list-itsupport": [
+      "24/7 help desk and remote troubleshooting",
+      "Real-time network and systems monitoring",
+      "Cybersecurity audits, patching, and threat detection",
+      "Cloud infrastructure setup and maintenance",
+      "Compliance with NIST, CISA, and OPS Core CyberSec policies"
+    ],
+    "modal-title-professionals": "About Professionals",
+    "modal-content-professionals": "Access our network of highly skilled and experienced professionals to meet your specific project or long-term staffing needs. We provide experts in various fields, including IT, project management, finance, and human resources, ensuring you get the right talent for your business.",
+    "modal-list-professionals": [
+      "Remote IT professionals (SysAdmins, DevOps, Analysts)",
+      "Project managers and agile consultants",
+      "Finance and accounting professionals",
+      "Human resources and recruitment experts",
+      "OPS-vetted talent with NDAs, compliance training, and role-specific training",
+      "Ask AI"
+    ]
+  },
+  es: {
+    "home": "Inicio",
+    "business-ops": "Operaciones de Negocio",
+    "contact-center": "Centro de Contacto",
+    "it-support": "Soporte de TI",
+    "professionals": "Profesionales",
+    "business-ops-title": "Operaciones de Negocio",
+    "business-ops-content": "Optimice sus procesos, maximice la eficiencia, garantice el cumplimiento y escale su negocio con precisión.",
+    "contact-center-title": "Centro de Contacto",
+    "contact-center-content": "Mejore la participación del cliente con soporte multilingüe y multicanal: 24/7, basado en datos y empático.",
+    "it-support-title": "Soporte de TI",
+    "it-support-content": "Ayuda técnica proactiva, segura y en tiempo real, gestión de la nube y ciberdefensa para empresas de todos los tamaños.",
+    "professionals-title": "Profesionales",
+    "professionals-content": "Talento investigado por OPS para TI, recursos humanos, proyectos, finanzas, por contrato o a tiempo completo, listo cuando usted lo esté.",
+    "modal-title-business": "Sobre Operaciones de Negocio",
+    "modal-content-business": "Contenido detallado sobre nuestros servicios de Operaciones de Negocio. Ayudamos a optimizar sus procesos, mejorar la eficiencia e impulsar el crecimiento mediante el apoyo operativo estratégico. Las áreas clave incluyen la optimización de procesos, la gestión de la cadena de suministro y el aseguramiento de la calidad.",
+    "modal-list-business": [
+      "Digitalización y automatización de flujos de trabajo",
+      "Estrategias de eficiencia logística y de inventario",
+      "Marcos de riesgo y cumplimiento (alineados con NIST, ISO, CISA)",
+      "Paneles y análisis de métricas de rendimiento",
+      "Capacitación remota y operaciones Lean"
+    ],
+    "modal-title-contactcenter": "Sobre el Centro de Contacto",
+    "modal-content-contactcenter": "Explore nuestras soluciones integrales de Centro de Contacto diseñadas para mejorar la satisfacción y el compromiso del cliente en todos los puntos de contacto. Ofrecemos servicios de llamadas entrantes y salientes, soporte multicanal (correo electrónico, chat, redes sociales) y análisis avanzados.",
+    "modal-list-contactcenter": [
+      "Gestión de llamadas entrantes y salientes 24/7",
+      "Soporte por chat y correo electrónico en varios idiomas",
+      "Integración con plataformas CRM (por ejemplo, HubSpot, Salesforce)",
+      "Participación en redes sociales y seguimiento de sentimientos",
+      "Análisis de la experiencia del cliente y monitoreo de la calidad"
+    ],
+    "modal-title-itsupport": "Sobre Soporte de TI",
+    "modal-content-itsupport": "Nuestros servicios de Soporte de TI brindan asistencia confiable y oportuna para mantener sus sistemas funcionando sin problemas y de forma segura. Los servicios incluyen soporte de mesa de ayuda, monitoreo de red, servicios de ciberseguridad y gestión de infraestructura en la nube.",
+    "modal-list-itsupport": [
+      "Soporte técnico 24/7 y solución remota de problemas",
+      "Monitoreo en tiempo real de redes y sistemas",
+      "Auditorías de ciberseguridad, parches y detección de amenazas",
+      "Configuración y mantenimiento de la infraestructura en la nube",
+      "Cumplimiento de las políticas de ciberseguridad básicas de NIST, CISA y OPS"
+    ],
+    "modal-title-professionals": "Sobre Profesionales",
+    "modal-content-professionals": "Acceda a nuestra red de profesionales altamente cualificados y experimentados para satisfacer sus necesidades específicas de proyectos o de personal a largo plazo. Proporcionamos expertos en diversos campos, incluyendo TI, gestión de proyectos, finanzas y recursos humanos, asegurando que obtenga el talento adecuado para su negocio.",
+    "modal-list-professionals": [
+      "Profesionales de TI remotos (administradores de sistemas, DevOps, analistas)",
+      "Gerentes de proyecto y consultores ágiles",
+      "Profesionales de finanzas y contabilidad",
+      "Expertos en recursos humanos y reclutamiento",
+      "Talento investigado por OPS con NDA, capacitación en cumplimiento y capacitación específica para el rol",
+      "Preguntar a la IA"
+    ]
+  }
+};
+
 // Modal content data (all services, DRY, NIST-style compliance)
 const modalData = {
   professionals: {
@@ -87,6 +194,7 @@ export function openModal(type, isFab = false) {
       </div>
     `;
   } else {
+    const lang = document.getElementById('lang-toggle').textContent === 'ES' ? 'es' : 'en';
     const data = modalData[type];
     if (!data) return;
     modal.innerHTML = `
@@ -94,12 +202,12 @@ export function openModal(type, isFab = false) {
         <button class="modal-x" aria-label="CERRAR" id="modal-x">X</button>
         <div class="modal-header" style="cursor:move; user-select:none;">
           <img class="modal-img" src="${data.img}" alt="${data.imgAlt}" />
-          <div><div class="modal-title">${data.title}</div></div>
+          <div><div class="modal-title">${translations[lang][`modal-title-${type}`]}</div></div>
         </div>
-        <div class="modal-content">${data.content}</div>
+        <div class="modal-content">${translations[lang][`modal-content-${type}`]}</div>
         <div class="modal-video">${data.video}</div>
         <ul style="margin-bottom:1.2em; margin-left:1.3em;">
-          ${data.list.map(i => `<li>${i}</li>`).join("")}
+          ${translations[lang][`modal-list-${type}`].map(i => `<li>${i}</li>`).join("")}
         </ul>
         <div class="modal-actions">
           <button class="modal-btn">Learn More</button>
@@ -129,14 +237,22 @@ export function openModal(type, isFab = false) {
   }
 }
 
+
 // Global toggles (all files listen to these events)
 window.addEventListener('toggle-lang', () => {
   const btn = document.getElementById('lang-toggle');
-  btn.textContent = btn.textContent === 'ES' ? 'EN' : 'ES';
+  const lang = btn.textContent === 'ES' ? 'en' : 'es';
+  btn.textContent = lang === 'es' ? 'EN' : 'ES';
   const mobileBtn = document.getElementById('mobile-lang-toggle');
   if (mobileBtn) {
     mobileBtn.textContent = btn.textContent;
   }
+
+  const elements = document.querySelectorAll('[data-translate]');
+  elements.forEach(el => {
+    const key = el.dataset.translate;
+    el.textContent = translations[lang][key];
+  });
 });
 window.addEventListener('toggle-theme', () => {
   document.body.classList.toggle('dark');
