@@ -92,25 +92,26 @@ body.dark {
   gap: 2.4rem;
 }
 .card {
-  padding: 2.3rem;
+  --grad: var(--clr-primary), var(--clr-accent);
+  padding: 1.7rem;         /* Reduced from 2.3rem */
   background: var(--clr-glass);
   border-radius: 2rem;
+  gap: 1.1rem;             /* Less space inside grid */
   display: grid;
   grid-template: 'title icon' 'content content' 'bar bar' / 1fr auto;
   color: #251541;
-  box-shadow: 0 2px 28px #b6b9f7a8, -20px 20px 40px hsl(270 42% 45% / 0.18);
+  box-shadow: var(--clr-card-shadow);
   backdrop-filter: blur(8px);
   border: 1px solid #e6e7f2;
   transition: transform 0.18s, box-shadow 0.18s;
   position: relative;
   overflow: hidden;
-}
-.card:hover {
-  transform: translateY(-5px) scale(1.03);
-  box-shadow: 0 4px 32px #ff3bdc22;
+  cursor: pointer;
+  min-height: 170px;       /* Reduced from 220px */
+  font-size: 0.93em;       /* Slightly smaller text inside card */
 }
 .card .title {
-  font-size: 1.32rem;
+  font-size: 1.01rem;      /* 25% smaller than 1.32rem */
   grid-area: title;
   align-self: end;
   text-transform: uppercase;
@@ -119,27 +120,20 @@ body.dark {
 }
 .card .icon {
   grid-area: icon;
-  font-size: 2.5rem;
+  font-size: 1.9rem;       /* Reduced from 2.5rem */
   align-self: end;
   justify-self: end;
 }
-.card .icon > i {
-  color: transparent;
-  background: linear-gradient(100deg, var(--clr-primary), var(--clr-accent));
-  background-clip: text;
-  -webkit-background-clip: text;
-  filter: drop-shadow(0 0 2px #ffef2f55);
-}
 .card .content {
   grid-area: content;
-  margin-top: 1rem;
+  margin-top: 0.6rem;      /* Less margin for compact look */
 }
 .card::after {
   content: "";
   grid-area: bar;
   height: 2px;
-  background-image: linear-gradient(90deg, var(--clr-primary), var(--clr-accent));
-  margin-top: 1.2rem;
+  background-image: linear-gradient(90deg, var(--grad));
+  margin-top: 0.9rem;      /* Less space after for compactness */
 }
 body.dark .card {
   background: rgba(32,26,49,0.91);
@@ -150,7 +144,6 @@ body.dark .card {
 body.dark .card .icon > i {
   filter: drop-shadow(0 0 2px #00c4ff55);
 }
-
 /* Modal base (used for all modals) */
 .modal-backdrop {
   position: fixed;
