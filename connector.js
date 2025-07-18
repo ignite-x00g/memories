@@ -395,7 +395,8 @@ export function openModal(type, isFab = false) {
           });
         });
         return;
-    } else {
+    } 
+      else if (type === 'contact') {
         const url = 'contact/contact.html';
         fetch(url)
           .then(response => response.text())
