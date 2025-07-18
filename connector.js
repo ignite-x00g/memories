@@ -186,9 +186,13 @@ export function openModal(type, isFab = false) {
   if (isFab) {
     let content = '';
     if (type === 'join') {
-      content = `<iframe src="memories/join.html" frameborder="0" class="fab-modal-iframe"></iframe>`;
+      fetch('join/join.html').then(r => r.text()).then(html => {
+        modal.querySelector('.ops-modal').innerHTML = html;
+      });
     } else if (type === 'contact') {
-      content = `<iframe src="contact.html" frameborder="0" class="fab-modal-iframe"></iframe>`;
+        fetch('contact/contact.html').then(r => r.text()).then(html => {
+            modal.querySelector('.ops-modal').innerHTML = html;
+        });
     } else if (type === 'chat') {
       modal.innerHTML = `
         <div id="chatbot-container" tabindex="-1" role="dialog" aria-modal="true">
