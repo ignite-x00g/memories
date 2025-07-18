@@ -243,7 +243,7 @@ export function openModal(type, isFab = false) {
           ${translations[lang][`modal-list-${type}`].map(i => `<li>${i}</li>`).join("")}
         </ul>
         <div class="modal-actions">
-          <button class="modal-btn">Learn More</button>
+          <button class="modal-btn" onclick="window.location.href='${type}.html'">Learn More</button>
           <button class="modal-btn">Ask Chattia</button>
           <button class="modal-btn cta" onclick="window.location.href='contact.html'">Contact Us</button>
           <button class="modal-btn" id="cancel-btn">Cancel</button>

@@ -20,23 +20,31 @@
       <button class="toggle-btn" id="theme-toggle">Dark</button>
     </div>
   </nav>
-  </nav>
-  <main style="max-width:680px; margin:3em auto;">
+  <main style="max-width:700px; margin:3em auto;">
     <h1 style="text-transform:uppercase;">IT Support</h1>
+    <img src="https://via.placeholder.com/700x300" alt="Image placeholder" style="width:100%; height:auto;">
     <p>
-      Nuestros servicios de Soporte de TI brindan asistencia confiable y oportuna para mantener sus sistemas funcionando sin problemas y de forma segura.
-      <br>
-      <strong>Incluye:</strong>
+        Reliable and timely IT support to keep your systems running smoothly.
     </p>
     <ul>
-      <li>Soporte técnico 24/7 y solución remota de problemas</li>
-      <li>Monitoreo en tiempo real de red y sistemas</li>
-      <li>Auditorías de ciberseguridad, parches y detección de amenazas</li>
-      <li>Configuración y mantenimiento de infraestructura en la nube</li>
-      <li>Cumplimiento con NIST, CISA y políticas OPS Core CyberSec</li>
+        <li>24/7 help desk and remote troubleshooting</li>
+        <li>Real-time network and systems monitoring</li>
+        <li>Cybersecurity audits, patching, and threat detection</li>
+        <li>Cloud infrastructure setup and maintenance</li>
+        <li>Compliance with NIST, CISA, and OPS Core CyberSec policies</li>
     </ul>
+    <div style="text-align:center; margin: 2em 0;">
+        <video width="560" height="315" controls style="width:100%; max-width:560px;">
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam nibh. Mauris ac mauris sed pede pellentesque fermentum. Maecenas adipiscing ante non diam.
+    </p>
     <div class="modal-actions" style="margin-top:2.2em;">
-      <button class="modal-btn cta" id="itsupport-modal-btn">Ver Vista Previa del Servicio</button>
+      <a href="contact.html" class="modal-btn cta">Contact Us</a>
+      <a href="join.html" class="modal-btn">Join Us</a>
     </div>
   </main>
   <div id="fab-root"></div>
@@ -44,54 +52,5 @@
   <script src="main.js"></script>
   <script src="connector.js"></script>
   <script src="fabmain.js"></script>
-  <script>
-    document.getElementById('itsupport-modal-btn').onclick = function() {
-      let old = document.getElementById('ops-modal-backdrop');
-      if (old) old.remove();
-      const modal = document.createElement('div');
-      modal.className = 'modal-backdrop';
-      modal.id = 'ops-modal-backdrop';
-      modal.innerHTML = `
-        <div class="ops-modal" tabindex="-1" role="dialog" aria-modal="true">
-          <button class="modal-x" aria-label="CERRAR" id="modal-x">X</button>
-          <div class="modal-header">
-            <img class="modal-img" src="img/itsupport.jpg" alt="Soporte IT" />
-            <div>
-              <div class="modal-title">SOBRE SOPORTE IT</div>
-            </div>
-          </div>
-          <div class="modal-content">
-            Nuestros servicios de Soporte de TI brindan asistencia confiable y oportuna para mantener sus sistemas funcionando sin problemas y de forma segura. Los servicios incluyen soporte de mesa de ayuda, monitoreo de red, servicios de ciberseguridad y gestión de infraestructura en la nube.
-          </div>
-          <div class="modal-video">Video placeholder</div>
-          <ul style="margin-bottom:1.2em; margin-left:1.3em;">
-            <li>Soporte técnico 24/7 y solución remota de problemas</li>
-            <li>Monitoreo en tiempo real de red y sistemas</li>
-            <li>Auditorías de ciberseguridad, parches y detección de amenazas</li>
-            <li>Configuración y mantenimiento de infraestructura en la nube</li>
-            <li>Cumplimiento con NIST, CISA y políticas OPS Core CyberSec</li>
-          </ul>
-          <div class="modal-actions">
-            <button class="modal-btn">Learn More</button>
-            <button class="modal-btn">Ask Chattia</button>
-            <button class="modal-btn cta" id="cta-itsupport-contact">Contact Us</button>
-            <button class="modal-btn" id="cancel-btn">Cancel</button>
-          </div>
-        </div>
-      `;
-      document.body.appendChild(modal);
-      function closeModal() { modal.remove(); }
-      modal.querySelector('.modal-x').onclick = closeModal;
-      modal.onclick = e => (e.target === modal ? closeModal() : null);
-      document.getElementById('cancel-btn').onclick = closeModal;
-      document.getElementById('cta-itsupport-contact').onclick = () => window.parent ? window.parent.postMessage({action:'open-contact-fab'},'*') : window.location.href='contact.html';
-      document.addEventListener('keydown', function esc(e) {
-        if (e.key === "Escape") {
-          closeModal();
-          document.removeEventListener('keydown', esc);
-        }
-      });
-    };
-  </script>
 </body>
 </html>

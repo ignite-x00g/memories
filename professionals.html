@@ -14,27 +14,37 @@
       <a href="business.html" class="nav-link">Business Operations</a>
       <a href="contactcenter.html" class="nav-link">Contact Center</a>
       <a href="itsupport.html" class="nav-link">IT Support</a>
-     </div>
-   <div class="toggles">
+    </div>
+    <div class="toggles">
       <button class="toggle-btn" id="lang-toggle">EN</button>
       <button class="toggle-btn" id="theme-toggle">Dark</button>
     </div>
   </nav>
-  <main style="max-width:680px; margin:3em auto;">
+  <main style="max-width:700px; margin:3em auto;">
     <h1 style="text-transform:uppercase;">Professionals</h1>
+    <img src="https://via.placeholder.com/700x300" alt="Image placeholder" style="width:100%; height:auto;">
     <p>
-      Acceda a nuestra red de profesionales altamente cualificados y experimentados para satisfacer sus necesidades específicas de proyectos o de personal a largo plazo.<br>
-      <strong>Incluye:</strong>
+        Access our network of highly skilled and experienced professionals.
     </p>
     <ul>
-      <li>Profesionales IT remotos (SysAdmins, DevOps, Analistas)</li>
-      <li>Gerentes de proyecto y consultores ágiles</li>
-      <li>Profesionales de finanzas y contabilidad</li>
-      <li>Expertos en recursos humanos y reclutamiento</li>
-      <li>Talento validado por OPS con NDA y capacitación</li>
+        <li>Remote IT professionals (SysAdmins, DevOps, Analysts)</li>
+        <li>Project managers and agile consultants</li>
+        <li>Finance and accounting professionals</li>
+        <li>Human resources and recruitment experts</li>
+        <li>OPS-vetted talent with NDAs, compliance training, and role-specific training</li>
     </ul>
+    <div style="text-align:center; margin: 2em 0;">
+        <video width="560" height="315" controls style="width:100%; max-width:560px;">
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam nibh. Mauris ac mauris sed pede pellentesque fermentum. Maecenas adipiscing ante non diam.
+    </p>
     <div class="modal-actions" style="margin-top:2.2em;">
-      <button class="modal-btn cta" id="professionals-modal-btn">Ver Vista Previa del Servicio</button>
+      <a href="contact.html" class="modal-btn cta">Contact Us</a>
+      <a href="join.html" class="modal-btn">Join Us</a>
     </div>
   </main>
   <div id="fab-root"></div>
@@ -42,55 +52,5 @@
   <script src="main.js"></script>
   <script src="connector.js"></script>
   <script src="fabmain.js"></script>
-  <script>
-    document.getElementById('professionals-modal-btn').onclick = function() {
-      let old = document.getElementById('ops-modal-backdrop');
-      if (old) old.remove();
-      const modal = document.createElement('div');
-      modal.className = 'modal-backdrop';
-      modal.id = 'ops-modal-backdrop';
-      modal.innerHTML = `
-        <div class="ops-modal" tabindex="-1" role="dialog" aria-modal="true">
-          <button class="modal-x" aria-label="CERRAR" id="modal-x">X</button>
-          <div class="modal-header">
-            <img class="modal-img" src="img/professionals.jpg" alt="Profesionales" />
-            <div>
-              <div class="modal-title">SOBRE PROFESIONALES</div>
-            </div>
-          </div>
-          <div class="modal-content">
-            Acceda a nuestra red de profesionales altamente cualificados y experimentados para satisfacer sus necesidades específicas de proyectos o de personal a largo plazo. Proporcionamos expertos en diversos campos, incluyendo TI, gestión de proyectos, finanzas y recursos humanos, asegurando que obtenga el talento adecuado para su negocio.
-          </div>
-          <div class="modal-video">Video placeholder</div>
-          <ul style="margin-bottom:1.2em; margin-left:1.3em;">
-            <li>Profesionales IT remotos (SysAdmins, DevOps, Analistas)</li>
-            <li>Gerentes de proyecto y consultores ágiles</li>
-            <li>Profesionales de finanzas y contabilidad</li>
-            <li>Expertos en recursos humanos y reclutamiento</li>
-            <li>Talento validado por OPS con NDA, capacitación en cumplimiento y capacitación específica para el rol</li>
-            <li>Preguntar AI</li>
-          </ul>
-          <div class="modal-actions">
-            <button class="modal-btn">Learn More</button>
-            <button class="modal-btn">Ask Chattia</button>
-            <button class="modal-btn cta" id="cta-professionals-contact">Contact Us</button>
-            <button class="modal-btn" id="cancel-btn">Cancel</button>
-          </div>
-        </div>
-      `;
-      document.body.appendChild(modal);
-      function closeModal() { modal.remove(); }
-      modal.querySelector('.modal-x').onclick = closeModal;
-      modal.onclick = e => (e.target === modal ? closeModal() : null);
-      document.getElementById('cancel-btn').onclick = closeModal;
-      document.getElementById('cta-professionals-contact').onclick = () => window.parent ? window.parent.postMessage({action:'open-contact-fab'},'*') : window.location.href='contact.html';
-      document.addEventListener('keydown', function esc(e) {
-        if (e.key === "Escape") {
-          closeModal();
-          document.removeEventListener('keydown', esc);
-        }
-      });
-    };
-  </script>
 </body>
 </html>
