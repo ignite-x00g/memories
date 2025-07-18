@@ -117,7 +117,7 @@ const translations = {
 const modalData = {
   professionals: {
     title: "Sobre Profesionales",
-    img: "img/professionals.jpg",
+    img: "memories/img/professionals.jpg",
     imgAlt: "Profesionales",
     content: `Acceda a nuestra red de profesionales altamente cualificados y experimentados para satisfacer sus necesidades específicas de proyectos o de personal a largo plazo. Proporcionamos expertos en diversos campos, incluyendo TI, gestión de proyectos, finanzas y recursos humanos, asegurando que obtenga el talento adecuado para su negocio.`,
     video: "Video placeholder",
@@ -132,7 +132,7 @@ const modalData = {
   },
   itsupport: {
     title: "Sobre Soporte IT",
-    img: "img/itsupport.jpg",
+    img: "memories/img/itsupport.jpg",
     imgAlt: "Soporte IT",
     content: `Nuestros servicios de Soporte de TI brindan asistencia confiable y oportuna para mantener sus sistemas funcionando sin problemas y de forma segura. Los servicios incluyen soporte de mesa de ayuda, monitoreo de red, servicios de ciberseguridad y gestión de infraestructura en la nube.`,
     video: "Video placeholder",
@@ -146,7 +146,7 @@ const modalData = {
   },
   contactcenter: {
     title: "Sobre el Centro de Contacto",
-    img: "img/contactcenter.jpg",
+    img: "memories/img/contactcenter.jpg",
     imgAlt: "Centro de Contacto",
     content: `Explore nuestras soluciones integrales de Centro de Contacto diseñadas para mejorar la satisfacción y el compromiso del cliente en todos los puntos de contacto. Ofrecemos servicios de llamadas entrantes y salientes, soporte multicanal (correo electrónico, chat, redes sociales) y análisis avanzados.`,
     video: "Video placeholder",
@@ -160,7 +160,7 @@ const modalData = {
   },
   business: {
     title: "Sobre Gestion",
-    img: "img/business.jpg",
+    img: "memories/img/business.jpg",
     imgAlt: "Gestion",
     content: `Contenido detallado sobre nuestros servicios de Operaciones Empresariales. Ayudamos a optimizar sus procesos, mejorar la eficiencia e impulsar el crecimiento mediante el apoyo operativo estratégico. Las áreas clave incluyen la optimización de procesos, la gestión de la cadena de suministro y el aseguramiento de la calidad.`,
     video: "Video placeholder",
@@ -186,9 +186,9 @@ export function openModal(type, isFab = false) {
   if (isFab) {
     let content = '';
     if (type === 'join') {
-      content = `<iframe src="join.html" frameborder="0" class="fab-modal-iframe"></iframe>`;
+      content = `<iframe src="memories/join.html" frameborder="0" class="fab-modal-iframe"></iframe>`;
     } else if (type === 'contact') {
-      content = `<iframe src="memories/contact.html" frameborder="0" class="fab-modal-iframe"></iframe>`;
+      content = `<iframe src="contact.html" frameborder="0" class="fab-modal-iframe"></iframe>`;
     } else if (type === 'chat') {
       modal.innerHTML = `
         <div id="chatbot-container" tabindex="-1" role="dialog" aria-modal="true">
@@ -314,6 +314,7 @@ window.addEventListener('toggle-theme', () => {
 // --- Draggable logic ---
 function makeModalDraggable(modal) {
   const header = modal.querySelector('.modal-header');
+  if (!header) return;
   let offsetX = 0, offsetY = 0, startX = 0, startY = 0, dragging = false;
 
   header.addEventListener('mousedown', dragStart, false);
