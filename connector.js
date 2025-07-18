@@ -191,7 +191,35 @@ export function openModal(type, isFab = false) {
     } else if (type === 'contact') {
       content = `<iframe src="contact.html" frameborder="0" class="fab-modal-iframe"></iframe>`;
     } else if (type === 'chat') {
-      content = `<iframe src="chat.html" frameborder="0" class="fab-modal-iframe"></iframe>`;
+      modal.innerHTML = `
+        <div id="chatbot-container" tabindex="-1" role="dialog" aria-modal="true">
+          <div id="chatbot-header">
+            <span id="title" data-en="OPS AI Chatbot" data-es="Chatbot OPS AI">OPS AI Chatbot</span>
+            <span>
+              <span id="chatbot-lang" class="ctrl">ES</span>
+              &nbsp;|&nbsp;
+              <span id="chatbot-theme" class="ctrl">Dark</span>
+              <button id="chatbot-x" aria-label="Close">×</button>
+            </span>
+          </div>
+          <div id="chat-log" aria-live="polite"></div>
+          <div id="chatbot-form-container">
+            <form id="chatbot-input-row" autocomplete="off">
+              <input id="chatbot-input" type="text" placeholder="Type your message..." required maxlength="256">
+              <button id="chatbot-send" type="submit" disabled aria-label="Send">
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </form>
+            <label class="human-check">
+              <input type="checkbox" id="human-check">
+              <span id="human-label" data-en="I am human" data-es="Soy humano">I am human</span>
+            </label>
+          </div>
+        </div>`;
+        document.body.appendChild(modal);
+        const chatbotCont = document.getElementById('chatbot-container');
+        makeModalDraggable(chatbotCont, chatbotCont.querySelector('#chatbot-header'));
+        return;
     }
     modal.innerHTML = `
       <div class="ops-modal" style="max-width:640px; width:96vw; height:560px;">
@@ -240,6 +268,11 @@ export function openModal(type, isFab = false) {
 
   if (!isFab) {
     makeModalDraggable(document.getElementById('draggable-modal'));
+  } else {
+    const fabModal = modal.querySelector('.ops-modal');
+    if (fabModal) {
+      makeModalDraggable(fabModal);
+    }
   }
 }
 
@@ -247,17 +280,20 @@ export function openModal(type, isFab = false) {
 // Global toggles (all files listen to these events)
 window.addEventListener('toggle-lang', () => {
   const btn = document.getElementById('lang-toggle');
-  const lang = btn.textContent === 'ES' ? 'en' : 'es';
-  btn.textContent = lang === 'es' ? 'EN' : 'ES';
+  const currentLang = btn.textContent === 'ES' ? 'en' : 'es';
+  const newLang = currentLang === 'en' ? 'es' : 'en';
+  btn.textContent = newLang === 'es' ? 'ES' : 'EN';
   const mobileBtn = document.getElementById('mobile-lang-toggle');
   if (mobileBtn) {
-    mobileBtn.textContent = btn.textContent;
+    mobileBtn.textContent = newLang === 'es' ? 'ES' : 'EN';
   }
 
   const elements = document.querySelectorAll('[data-translate]');
   elements.forEach(el => {
     const key = el.dataset.translate;
-    el.textContent = translations[lang][key];
+    if (translations[newLang] && translations[newLang][key]) {
+      el.textContent = translations[newLang][key];
+    }
   });
 });
 window.addEventListener('toggle-theme', () => {

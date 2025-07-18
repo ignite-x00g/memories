@@ -18,10 +18,14 @@ fetch('fabs.html').then(r => r.text()).then(html => {
   // Accordion nav open/close logic
   const accordionBtn = document.getElementById('mobile-fab-services');
   const panel = document.getElementById('mobile-panel-services');
-  accordionBtn.onclick = () => panel.classList.toggle('active');
+  accordionBtn.onclick = () => {
+    panel.classList.toggle('active');
+    document.body.classList.toggle('mobile-menu-open');
+  };
   document.body.addEventListener('click', function(e) {
     if (!e.target.closest('.mobile-accordion-btn') && !e.target.closest('.accordion-panel')) {
       panel.classList.remove('active');
+      document.body.classList.remove('mobile-menu-open');
     }
   }, true);
 
