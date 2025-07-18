@@ -315,4 +315,72 @@ footer {
 /* Responsive */
 @media (max-width: 900px) {
   .fab-stack { display: none; }
+  .mobile-accordion-nav {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 1000;
+  }
+  .mobile-accordion-btn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--clr-primary), var(--clr-accent));
+    color: #fff;
+    border: none;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .mobile-accordion-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
+  .accordion-panel {
+    position: absolute;
+    bottom: 65px;
+    right: 0;
+    width: 200px;
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    transform: scale(0.95);
+    opacity: 0;
+    transition: all 0.3s ease;
+    transform-origin: bottom right;
+    display: none;
+  }
+  .accordion-panel.active {
+    transform: scale(1);
+    opacity: 1;
+    display: flex;
+  }
+  .accordion-panel a,
+  .accordion-panel button {
+    text-decoration: none;
+    color: #333;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s;
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  .accordion-panel a:hover,
+  .accordion-panel button:hover {
+    background-color: #f0f0f0;
+  }
+  body.mobile-menu-open {
+    overflow: hidden;
+  }
 }
