@@ -7,48 +7,11 @@
   <link rel="stylesheet" href="global.css">
 </head>
 <body>
-  <div class="ops-modal" style="max-width:510px; margin:40px auto;">
-    <button class="modal-x" onclick="window.parent.postMessage({action:'close-fab-modal'},'*')" aria-label="CERRAR">X</button>
-    <h2 style="text-transform:uppercase; margin-top:0;">Contact Us</h2>
-    <form id="contact-form" autocomplete="off" style="margin-top:2em;">
-      <div style="margin-bottom:1.2em;">
-        <label for="contact-name">Name*</label>
-        <input type="text" id="contact-name" name="name" required maxlength="64" autocomplete="off" />
-      </div>
-      <div style="margin-bottom:1.2em;">
-        <label for="contact-email">Email*</label>
-        <input type="email" id="contact-email" name="email" required maxlength="64" autocomplete="off" />
-      </div>
-      <div style="margin-bottom:1.2em;">
-        <label for="contact-company">Company</label>
-        <input type="text" id="contact-company" name="company" maxlength="64" autocomplete="off" />
-      </div>
-      <div style="margin-bottom:1.5em;">
-        <label for="contact-msg">Message*</label>
-        <textarea id="contact-msg" name="message" required maxlength="600" rows="5" style="resize:vertical;"></textarea>
-      </div>
-      <div class="modal-actions" style="justify-content:flex-end;">
-        <button type="button" class="modal-btn" id="cancel-btn">Cancel</button>
-        <button type="submit" class="modal-btn cta">Send</button>
-      </div>
-    </form>
-    <div id="form-result" style="display:none; margin-top:1.6em;"></div>
-  </div>
-  <script>
-    // Modal close logic for iframe/fab modal
-    document.getElementById('cancel-btn').onclick = () => window.parent.postMessage({action:'close-fab-modal'},'*');
-    window.addEventListener('keydown', function esc(e) {
-      if (e.key === "Escape") window.parent.postMessage({action:'close-fab-modal'},'*');
-    });
-    // Simple form validation, no external JS, minimal PII handling (to be replaced with secure backend/API)
-    document.getElementById('contact-form').onsubmit = function(e) {
-      e.preventDefault();
-      // Real backend/secure send required; demo below only fakes success for MVP.
-      document.getElementById('form-result').textContent = "Thank you. Your message has been sent securely.";
-      document.getElementById('form-result').style.display = "block";
-      this.style.display = "none";
-      setTimeout(() => window.parent.postMessage({action:'close-fab-modal'},'*'), 2000);
-    };
-  </script>
+  <main style="max-width:700px; margin:3em auto;">
+    <h1 style="text-transform:uppercase;">Contact Us</h1>
+    <p>
+      If you have any questions, please feel free to contact us. We are here to help.
+    </p>
+  </main>
 </body>
 </html>
