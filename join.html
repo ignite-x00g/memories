@@ -7,45 +7,11 @@
   <link rel="stylesheet" href="global.css">
 </head>
 <body>
-  <div class="ops-modal" style="max-width:510px; margin:40px auto;">
-    <button class="modal-x" onclick="window.parent.postMessage({action:'close-fab-modal'},'*')" aria-label="CERRAR">X</button>
-    <h2 style="text-transform:uppercase; margin-top:0;">Join Us</h2>
-    <form id="join-form" autocomplete="off" style="margin-top:2em;">
-      <div style="margin-bottom:1.2em;">
-        <label for="join-name">Full Name*</label>
-        <input type="text" id="join-name" name="name" required maxlength="64" autocomplete="off" />
-      </div>
-      <div style="margin-bottom:1.2em;">
-        <label for="join-email">Email*</label>
-        <input type="email" id="join-email" name="email" required maxlength="64" autocomplete="off" />
-      </div>
-      <div style="margin-bottom:1.2em;">
-        <label for="join-role">Role/Interest*</label>
-        <input type="text" id="join-role" name="role" required maxlength="64" autocomplete="off" />
-      </div>
-      <div style="margin-bottom:1.5em;">
-        <label for="join-msg">Message</label>
-        <textarea id="join-msg" name="message" maxlength="600" rows="4" style="resize:vertical;"></textarea>
-      </div>
-      <div class="modal-actions" style="justify-content:flex-end;">
-        <button type="button" class="modal-btn" id="cancel-btn">Cancel</button>
-        <button type="submit" class="modal-btn cta">Send</button>
-      </div>
-    </form>
-    <div id="form-result" style="display:none; margin-top:1.6em;"></div>
-  </div>
-  <script>
-    document.getElementById('cancel-btn').onclick = () => window.parent.postMessage({action:'close-fab-modal'},'*');
-    window.addEventListener('keydown', function esc(e) {
-      if (e.key === "Escape") window.parent.postMessage({action:'close-fab-modal'},'*');
-    });
-    document.getElementById('join-form').onsubmit = function(e) {
-      e.preventDefault();
-      document.getElementById('form-result').textContent = "Thank you. Your application was sent securely.";
-      document.getElementById('form-result').style.display = "block";
-      this.style.display = "none";
-      setTimeout(() => window.parent.postMessage({action:'close-fab-modal'},'*'), 2000);
-    };
-  </script>
+  <main style="max-width:700px; margin:3em auto;">
+    <h1 style="text-transform:uppercase;">Join Our Team</h1>
+    <p>
+      We are always looking for talented individuals to join our team. If you are passionate about technology and customer service, we would love to hear from you.
+    </p>
+  </main>
 </body>
 </html>

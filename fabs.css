@@ -77,4 +77,10 @@
     justify-content: space-around;
     align-items: center;
   }
+
+  .fab-modal-iframe {
+    width: 80vw;
+    height: 80vh;
+    margin-bottom: 20px;
+  }
 }
