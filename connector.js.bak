@@ -227,7 +227,7 @@ export function openModal(type, isFab = false) {
       </div>
     `;
   } else {
-    const lang = document.getElementById('lang-toggle').textContent === 'EN' ? 'es' : 'en';
+    const lang = document.getElementById('lang-toggle').textContent === 'EN' ? 'en' : 'es';
     const data = modalData[type];
     if (!data) return;
     modal.innerHTML = `
@@ -279,13 +279,12 @@ export function openModal(type, isFab = false) {
 // Global toggles (all files listen to these events)
 window.addEventListener('toggle-lang', () => {
   const btn = document.getElementById('lang-toggle');
-  const isEnglish = btn.textContent === 'EN';
-  const newLang = isEnglish ? 'es' : 'en';
-
-  btn.textContent = isEnglish ? 'ES' : 'EN';
+  const currentLang = btn.textContent === 'EN' ? 'es' : 'en';
+  const newLang = currentLang === 'es' ? 'en' : 'es';
+  btn.textContent = newLang === 'es' ? 'EN' : 'ES';
   const mobileBtn = document.getElementById('mobile-lang-toggle');
   if (mobileBtn) {
-    mobileBtn.textContent = isEnglish ? 'ES' : 'EN';
+    mobileBtn.textContent = newLang === 'es' ? 'ES' : 'EN';
   }
 
   const elements = document.querySelectorAll('[data-lang-en], [data-lang-es]');
