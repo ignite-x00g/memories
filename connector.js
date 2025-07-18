@@ -183,44 +183,24 @@ export function openModal(type, isFab = false) {
   const modal = document.createElement('div');
   modal.className = 'modal-backdrop';
   modal.id = 'ops-modal-backdrop';
-
-  if (isFab) {
-    let content = '';
-    if (type === 'join') {
-      content = `<iframe src="join.html" frameborder="0" class="fab-modal-iframe"></iframe>`;
-    } else if (type === 'contact') {
-      content = `<iframe src="contact.html" frameborder="0" class="fab-modal-iframe"></iframe>`;
-    } else if (type === 'chat') {
-      content = `<iframe src="chat.html" frameborder="0" class="fab-modal-iframe"></iframe>`;
-    }
-    modal.innerHTML = `
-      <div class="ops-modal" style="max-width:640px; width:96vw; height:560px;">
-        <button class="modal-x" aria-label="CERRAR" id="fab-modal-x">X</button>
-        ${content}
+  modal.innerHTML = `
+    <div class="ops-modal" tabindex="-1" role="dialog" aria-modal="true">
+      <button class="modal-x" aria-label="CERRAR" id="modal-x">X</button>
+      <div class="modal-header">
+        <img class="modal-img" src="${data.img}" alt="${data.imgAlt}" />
+        <div>
+            <div class="modal-title" data-lang-en="${data.title}" data-lang-es="${data.title}">${data.title}</div>
+        </div>
       </div>
-    `;
-  } else {
-    const lang = document.getElementById('lang-toggle').textContent === 'ES' ? 'es' : 'en';
-    const data = modalData[type];
-    if (!data) return;
-    modal.innerHTML = `
-      <div class="ops-modal" tabindex="-1" role="dialog" aria-modal="true" id="draggable-modal" style="top:12vh; left:0; right:0; margin:auto; position:fixed;">
-        <button class="modal-x" aria-label="CERRAR" id="modal-x">X</button>
-        <div class="modal-header" style="cursor:move; user-select:none;">
-          <img class="modal-img" src="${data.img}" alt="${data.imgAlt}" />
-          <div><div class="modal-title">${translations[lang][`modal-title-${type}`]}</div></div>
-        </div>
-        <div class="modal-content">${translations[lang][`modal-content-${type}`]}</div>
-        <div class="modal-video">${data.video}</div>
-        <ul style="margin-bottom:1.2em; margin-left:1.3em;">
-          ${translations[lang][`modal-list-${type}`].map(i => `<li>${i}</li>`).join("")}
-        </ul>
-        <div class="modal-actions">
-          <button class="modal-btn">Learn More</button>
-          <button class="modal-btn">Ask Chattia</button>
-          <button class="modal-btn cta" onclick="window.location.href='contact.html'">Contact Us</button>
-          <button class="modal-btn" id="cancel-btn">Cancel</button>
-        </div>
+        <div class="modal-content" data-lang-en="${data.content}" data-lang-es="${data.content}">${data.content}</div>
+      <div class="modal-video">${data.video}</div>
+      <ul style="margin-bottom:1.2em; margin-left:1.3em;">
+          ${data.list.map(i => `<li data-lang-en="${i}" data-lang-es="${i}">${i}</li>`).join("")}
+      </ul>
+      <div class="modal-actions">
+        <button class="modal-btn">Learn More</button>
+        <button class="modal-btn">Ask Chattia</button>
+        <button class="modal-btn cta" onclick="window.location.href='contact.html'">Contact Us</button>
       </div>
     `;
   }
@@ -254,10 +234,12 @@ window.addEventListener('toggle-lang', () => {
     mobileBtn.textContent = btn.textContent;
   }
 
-  const elements = document.querySelectorAll('[data-translate]');
+  const elements = document.querySelectorAll('[data-lang-en], [data-lang-es]');
   elements.forEach(el => {
-    const key = el.dataset.translate;
-    el.textContent = translations[lang][key];
+    const text = el.getAttribute(`data-lang-${lang}`);
+    if (text) {
+      el.textContent = text;
+    }
   });
 });
 window.addEventListener('toggle-theme', () => {
