@@ -6,32 +6,42 @@ fetch('fabs.html').then(r => r.text()).then(html => {
   document.getElementById('fab-root').innerHTML = html;
 
   // DESKTOP FAB triggers
-  document.getElementById('fab-join').onclick = () => openModal('join', true);
-  document.getElementById('fab-contact').onclick = () => openModal('contact', true);
-  document.getElementById('fab-chat').onclick = () => openModal('chat');
+  const fabJoin = document.getElementById('fab-join');
+  if (fabJoin) fabJoin.onclick = () => openModal('join', true);
+  const fabContact = document.getElementById('fab-contact');
+  if (fabContact) fabContact.onclick = () => openModal('contact', true);
+  const fabChat = document.getElementById('fab-chat');
+  if (fabChat) fabChat.onclick = () => openModal('chat');
 
   // MOBILE FAB triggers
-  document.getElementById('mobile-fab-join').onclick = () => openModal('join', true);
-  document.getElementById('mobile-fab-contact').onclick = () => openModal('contact', true);
-  document.getElementById('mobile-fab-chat').onclick = () => openModal('chat');
+  const mobileFabJoin = document.getElementById('mobile-fab-join');
+  if (mobileFabJoin) mobileFabJoin.onclick = () => openModal('join', true);
+  const mobileFabContact = document.getElementById('mobile-fab-contact');
+  if (mobileFabContact) mobileFabContact.onclick = () => openModal('contact', true);
+  const mobileFabChat = document.getElementById('mobile-fab-chat');
+  if (mobileFabChat) mobileFabChat.onclick = () => openModal('chat');
 
   // Accordion nav open/close logic
   const accordionBtn = document.getElementById('mobile-fab-services');
   const panel = document.getElementById('mobile-panel-services');
-  accordionBtn.onclick = () => {
-    panel.classList.toggle('active');
-    document.body.classList.toggle('mobile-menu-open');
-  };
-  document.body.addEventListener('click', function(e) {
-    if (!e.target.closest('.mobile-accordion-btn') && !e.target.closest('.accordion-panel')) {
-      panel.classList.remove('active');
-      document.body.classList.remove('mobile-menu-open');
-    }
-  }, true);
+  if (accordionBtn) {
+    accordionBtn.onclick = () => {
+      panel.classList.toggle('active');
+      document.body.classList.toggle('mobile-menu-open');
+    };
+    document.body.addEventListener('click', function(e) {
+      if (!e.target.closest('.mobile-accordion-btn') && !e.target.closest('.accordion-panel')) {
+        panel.classList.remove('active');
+        document.body.classList.remove('mobile-menu-open');
+      }
+    }, true);
+  }
 
   // Lang/Theme toggles via events
-  document.getElementById('mobile-lang-toggle').onclick = () =>
+  const mobileLangToggle = document.getElementById('mobile-lang-toggle');
+  if (mobileLangToggle) mobileLangToggle.onclick = () =>
     window.dispatchEvent(new Event('toggle-lang'));
-  document.getElementById('mobile-theme-toggle').onclick = () =>
+  const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+  if (mobileThemeToggle) mobileThemeToggle.onclick = () =>
     window.dispatchEvent(new Event('toggle-theme'));
 });
