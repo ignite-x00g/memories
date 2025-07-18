@@ -279,8 +279,8 @@ export function openModal(type, isFab = false) {
 // Global toggles (all files listen to these events)
 window.addEventListener('toggle-lang', () => {
   const btn = document.getElementById('lang-toggle');
-  const currentLang = btn.textContent === 'ES' ? 'en' : 'es';
-  const newLang = currentLang === 'en' ? 'es' : 'en';
+  const currentLang = btn.textContent === 'EN' ? 'es' : 'en';
+  const newLang = currentLang === 'es' ? 'en' : 'es';
   btn.textContent = newLang === 'es' ? 'EN' : 'ES';
   const mobileBtn = document.getElementById('mobile-lang-toggle');
   if (mobileBtn) {
