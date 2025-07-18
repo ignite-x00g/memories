@@ -183,13 +183,9 @@ export function openModal(type, isFab = false) {
   const modal = document.createElement('div');
   modal.className = 'modal-backdrop';
   modal.id = 'ops-modal-backdrop';
+
   if (isFab) {
-    let content = '';
-    if (type === 'join') {
-      content = `<iframe src="memories/join.html" frameborder="0" class="fab-modal-iframe"></iframe>`;
-    } else if (type === 'contact') {
-      content = `<iframe src="contact.html" frameborder="0" class="fab-modal-iframe"></iframe>`;
-    } else if (type === 'chat') {
+    if (type === 'chat') {
       modal.innerHTML = `
         <div id="chatbot-container" tabindex="-1" role="dialog" aria-modal="true">
           <div id="chatbot-header">
@@ -215,17 +211,33 @@ export function openModal(type, isFab = false) {
             </label>
           </div>
         </div>`;
-        document.body.appendChild(modal);
-        const chatbotCont = document.getElementById('chatbot-container');
-        makeModalDraggable(chatbotCont, chatbotCont.querySelector('#chatbot-header'));
-        return;
+      document.body.appendChild(modal);
+      const chatbotCont = document.getElementById('chatbot-container');
+      makeModalDraggable(chatbotCont, chatbotCont.querySelector('#chatbot-header'));
+      return;
     }
-    modal.innerHTML = `
-      <div class="ops-modal" style="max-width:640px; width:96vw; height:560px;">
-        <button class="modal-x" aria-label="CERRAR" id="fab-modal-x">X</button>
-        ${content}
-      </div>
-    `;
+
+    const url = type === 'join' ? 'join/join.html' : 'contact/contact.html';
+    fetch(url)
+      .then(response => response.text())
+      .then(content => {
+        modal.innerHTML = `
+          <div class="ops-modal" style="max-width:640px; width:96vw; height:auto; overflow-y: auto; max-height: 90vh;">
+            <button class="modal-x" aria-label="CERRAR" id="fab-modal-x">X</button>
+            ${content}
+          </div>
+        `;
+        document.body.appendChild(modal);
+
+        // Re-add close event listeners
+        modal.querySelector('.modal-x, #fab-modal-x').onclick = () => modal.remove();
+        modal.onclick = e => (e.target === modal ? modal.remove() : null);
+
+        const fabModal = modal.querySelector('.ops-modal');
+        if (fabModal) {
+          makeModalDraggable(fabModal);
+        }
+      });
   } else {
     // The language toggle button displays the active language code.
     // When it shows "ES" the page is currently in Spanish, otherwise English.
@@ -252,9 +264,9 @@ export function openModal(type, isFab = false) {
         </div>
       </div>
     `;
+    document.body.appendChild(modal);
+    makeModalDraggable(document.getElementById('draggable-modal'));
   }
-
-  document.body.appendChild(modal);
 
   // Trap focus, close events
   const closeModal = () => modal.remove();
@@ -266,15 +278,6 @@ export function openModal(type, isFab = false) {
       document.removeEventListener('keydown', esc);
     }
   });
-
-  if (!isFab) {
-    makeModalDraggable(document.getElementById('draggable-modal'));
-  } else {
-    const fabModal = modal.querySelector('.ops-modal');
-    if (fabModal) {
-      makeModalDraggable(fabModal);
-    }
-  }
 }
 
 
