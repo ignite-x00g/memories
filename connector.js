@@ -281,7 +281,7 @@ window.addEventListener('toggle-lang', () => {
   const btn = document.getElementById('lang-toggle');
   const currentLang = btn.textContent === 'ES' ? 'en' : 'es';
   const newLang = currentLang === 'en' ? 'es' : 'en';
-  btn.textContent = newLang === 'es' ? 'ES' : 'EN';
+  btn.textContent = newLang === 'es' ? 'EN' : 'ES';
   const mobileBtn = document.getElementById('mobile-lang-toggle');
   if (mobileBtn) {
     mobileBtn.textContent = newLang === 'es' ? 'ES' : 'EN';
