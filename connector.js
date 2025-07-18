@@ -227,7 +227,7 @@ export function openModal(type, isFab = false) {
       </div>
     `;
   } else {
-    const lang = document.getElementById('lang-toggle').textContent === 'ES' ? 'es' : 'en';
+    const lang = document.getElementById('lang-toggle').textContent === 'EN' ? 'en' : 'es';
     const data = modalData[type];
     if (!data) return;
     modal.innerHTML = `
