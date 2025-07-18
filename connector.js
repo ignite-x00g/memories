@@ -188,7 +188,7 @@ export function openModal(type, isFab = false) {
     if (type === 'join') {
       content = `<iframe src="join.html" frameborder="0" class="fab-modal-iframe"></iframe>`;
     } else if (type === 'contact') {
-      content = `<iframe src="contact.html" frameborder="0" class="fab-modal-iframe"></iframe>`;
+      content = `<iframe src="memories/contact.html" frameborder="0" class="fab-modal-iframe"></iframe>`;
     } else if (type === 'chat') {
       modal.innerHTML = `
         <div id="chatbot-container" tabindex="-1" role="dialog" aria-modal="true">
