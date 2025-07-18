@@ -249,16 +249,6 @@ export function openModal(type, isFab = false) {
           <button class="modal-btn" id="cancel-btn">Cancel</button>
         </div>
       </div>
-        <div class="modal-content" data-lang-en="${data.content}" data-lang-es="${data.content}">${data.content}</div>
-      <div class="modal-video">${data.video}</div>
-      <ul style="margin-bottom:1.2em; margin-left:1.3em;">
-          ${data.list.map(i => `<li data-lang-en="${i}" data-lang-es="${i}">${i}</li>`).join("")}
-      </ul>
-      <div class="modal-actions">
-        <button class="modal-btn">Learn More</button>
-        <button class="modal-btn">Ask Chattia</button>
-        <button class="modal-btn cta" onclick="window.location.href='contact.html'">Contact Us</button>
-      </div>
     `;
   }
 
@@ -299,9 +289,12 @@ window.addEventListener('toggle-lang', () => {
 
   const elements = document.querySelectorAll('[data-lang-en], [data-lang-es]');
   elements.forEach(el => {
-    const key = el.dataset.translate;
-    if (translations[newLang] && translations[newLang][key]) {
-      el.textContent = translations[newLang][key];
+    const enText = el.dataset.langEn;
+    const esText = el.dataset.langEs;
+    if (newLang === 'es' && esText) {
+      el.textContent = esText;
+    } else if (newLang === 'en' && enText) {
+      el.textContent = enText;
     }
   });
 });
