@@ -289,9 +289,12 @@ window.addEventListener('toggle-lang', () => {
 
   const elements = document.querySelectorAll('[data-lang-en], [data-lang-es]');
   elements.forEach(el => {
-    const key = el.dataset.translate;
-    if (translations[newLang] && translations[newLang][key]) {
-      el.textContent = translations[newLang][key];
+    const enText = el.dataset.langEn;
+    const esText = el.dataset.langEs;
+    if (newLang === 'es' && esText) {
+      el.textContent = esText;
+    } else if (newLang === 'en' && enText) {
+      el.textContent = enText;
     }
   });
 });
