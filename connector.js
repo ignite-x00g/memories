@@ -227,7 +227,9 @@ export function openModal(type, isFab = false) {
       </div>
     `;
   } else {
-    const lang = document.getElementById('lang-toggle').textContent === 'EN' ? 'es' : 'en';
+    // The language toggle button displays the active language code.
+    // When it shows "ES" the page is currently in Spanish, otherwise English.
+    const lang = document.getElementById('lang-toggle').textContent === 'ES' ? 'es' : 'en';
     const data = modalData[type];
     if (!data) return;
     modal.innerHTML = `
