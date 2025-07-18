@@ -11,7 +11,7 @@ fetch('fabs.html').then(r => r.text()).then(html => {
   const fabContact = document.getElementById('fab-contact');
   if (fabContact) fabContact.onclick = () => openModal('contact', true);
   const fabChat = document.getElementById('fab-chat');
-  if (fabChat) fabChat.onclick = () => openModal('chat');
+  if (fabChat) fabChat.onclick = () => openModal('chat', true);
 
   // MOBILE FAB triggers
   const mobileFabJoin = document.getElementById('mobile-fab-join');
