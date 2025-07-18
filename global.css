@@ -305,8 +305,8 @@ footer {
 /* FABs */
 .fab-stack {
   position: fixed;
-  bottom: 4rem;
-  right: 2rem;
+  bottom: 55px;
+  right: 10px;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
