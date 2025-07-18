@@ -197,10 +197,10 @@ export function openModal(type, isFab = false) {
               <button id="chatbot-x" aria-label="Close">×</button>
             </span>
           </div>
-          <div id="chat-log" aria-live="polite"></div>
+          <div id="chat-body" aria-live="polite"></div>
           <div id="chatbot-form-container">
-            <form id="chatbot-input-row" autocomplete="off">
-              <input id="chatbot-input" type="text" placeholder="Type your message..." required maxlength="256">
+            <form id="chat-form" autocomplete="off">
+              <input id="chat-input" type="text" placeholder="Type your message..." required maxlength="256">
               <button id="chatbot-send" type="submit" disabled aria-label="Send">
                 <i class="fas fa-paper-plane"></i>
               </button>
