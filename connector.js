@@ -13,35 +13,43 @@ async function fetchContent(url) {
  * Currently supports the "contact" modal.
  * @param {string} type - modal identifier
  */
-export async function openModal(type) {
+export async function openModal(type, overlayOnly = false) {
   const url = type === 'contact' ? 'contact/contact.html' : `${type}.html`;
   const html = await fetchContent(url);
 
   const wrapper = document.createElement('div');
   wrapper.innerHTML = html.trim();
-  const modal = wrapper.querySelector('[id$="-modal"]') || wrapper.firstElementChild;
-  if (!modal) return;
 
-  document.body.appendChild(modal);
+  let overlay;
+  if (overlayOnly) {
+    overlay = wrapper.querySelector('[id$="-modal"]') || wrapper.firstElementChild;
+  } else {
+    overlay = document.createElement('div');
+    overlay.classList.add('modal-overlay');
+    const content = wrapper.querySelector('[id$="-modal"]') || wrapper.firstElementChild;
+    if (content) overlay.appendChild(content);
+  }
+  if (!overlay) return;
+  document.body.appendChild(overlay);
 
   // Make draggable using header as handle
-  const container = modal.querySelector('.modal-content');
+  const container = overlay.querySelector('.modal-content');
   const header = container?.querySelector('.modal-header');
   if (container) makeModalDraggable(container, header);
 
   const close = () => {
-    modal.remove();
+    overlay.remove();
     document.removeEventListener('keydown', onEsc);
   };
 
   const onEsc = (e) => { if (e.key === 'Escape') close(); };
 
-  modal.addEventListener('click', e => { if (e.target === modal) close(); });
+  overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
   document.addEventListener('keydown', onEsc);
 
-  const closeIcon = modal.querySelector('[data-close]');
+  const closeIcon = overlay.querySelector('[data-close]');
   if (closeIcon) closeIcon.addEventListener('click', close);
 
-  const cancelBtn = modal.querySelector('#cancel-btn');
+  const cancelBtn = overlay.querySelector('#cancel-btn');
   if (cancelBtn) cancelBtn.addEventListener('click', close);
 }
