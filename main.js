@@ -5,7 +5,7 @@ import { openModal } from './connector.js';
 document.addEventListener('DOMContentLoaded', function() {
   // Card triggers
   document.getElementById('card-business').onclick = () =>
-    openModal('business');
+    openModal('business-modal');
   document.getElementById('card-contactcenter').onclick = () =>
     openModal('contactcenter');
   document.getElementById('card-itsupport').onclick = () =>
