@@ -426,10 +426,10 @@ export function openModal(type, isFab = false) {
           ${translations[lang][`modal-list-${type}`].map(i => `<li>${i}</li>`).join("")}
         </ul>
         <div class="modal-actions">
-          <button class.bind="modal-btn" onclick="openModal('join', true)">Join Us</button>
-          <button class.bind="modal-btn" onclick="openModal('contact', true)">Contact Us</button>
-          <button class="modal-btn" onclick="openModal('chat', true)">Ask Chattia</button>
-          <button class="modal-btn" id="cancel-btn">Cancel</button>
+          <a href="contact/contact.html" class="modal-btn cta">Contact Us</a>
+          <a href="join.html" class="modal-btn cta">Join Us</a>
+          <a href="itsupport.html" class="modal-btn">Learn More</a>
+          <button class="modal-btn" id="ask-chattia-btn">Ask Chattia</button>
         </div>
       </div>
     `;
@@ -437,6 +437,18 @@ export function openModal(type, isFab = false) {
     makeModalDraggable(document.getElementById('draggable-modal'));
 
     document.getElementById('ask-chattia-btn').onclick = () => openChatbot();
+
+    const closeModal = () => modal.remove();
+    modal.querySelector('.modal-x').onclick = closeModal;
+    modal.onclick = e => (e.target === modal ? closeModal() : null);
+
+    const escListener = (e) => {
+        if (e.key === "Escape") {
+            closeModal();
+            document.removeEventListener('keydown', escListener);
+        }
+    };
+    document.addEventListener('keydown', escListener);
   }
 
   // Trap focus, close events
