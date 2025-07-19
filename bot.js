@@ -127,7 +127,7 @@ function centerModal(modal) {
     modal.style.top = `${(window.innerHeight - modal.offsetHeight) / 2}px`;
 }
 
-function makeModalDraggable(modal, header) {
+export function makeModalDraggable(modal, header) {
     if (!header) return;
     let offsetX = 0, offsetY = 0, startX = 0, startY = 0, dragging = false;
 
