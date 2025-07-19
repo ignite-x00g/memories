@@ -19,6 +19,11 @@ body.dark {
   color: #fafbfe;
 }
 
+/* Utility class for centered text */
+.centered {
+  text-align: center;
+}
+
 /* Modal drag styles */
 .ops-modal.dragging {
   opacity: 0.95;
