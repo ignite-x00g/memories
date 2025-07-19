@@ -1,4 +1,5 @@
 // connector.js
+import { openChatbot } from './bot.js';
 
 const translations = {
   en: {
@@ -185,38 +186,6 @@ export function openModal(type, isFab = false) {
   modal.id = 'ops-modal-backdrop';
 
   if (isFab) {
-    if (type === 'chat') {
-      modal.innerHTML = `
-        <div id="chatbot-container" tabindex="-1" role="dialog" aria-modal="true">
-          <div id="chatbot-header">
-            <span id="title" data-en="OPS AI Chatbot" data-es="Chatbot OPS AI">OPS AI Chatbot</span>
-            <span>
-              <span id="chatbot-lang" class="ctrl">ES</span>
-              &nbsp;|&nbsp;
-              <span id="chatbot-theme" class="ctrl">Dark</span>
-              <button id="chatbot-x" aria-label="Close">×</button>
-            </span>
-          </div>
-          <div id="chat-body" aria-live="polite"></div>
-          <div id="chatbot-form-container">
-            <form id="chat-form" autocomplete="off">
-              <input id="chat-input" type="text" placeholder="Type your message..." required maxlength="256">
-              <button id="chatbot-send" type="submit" disabled aria-label="Send">
-                <i class="fas fa-paper-plane"></i>
-              </button>
-            </form>
-            <label class="human-check">
-              <input type="checkbox" id="human-check">
-              <span id="human-label" data-en="I am human" data-es="Soy humano">I am human</span>
-            </label>
-          </div>
-        </div>`;
-      document.body.appendChild(modal);
-      const chatbotCont = document.getElementById('chatbot-container');
-      makeModalDraggable(chatbotCont, chatbotCont.querySelector('#chatbot-header'));
-      return;
-    }
-
     if (type === 'join') {
         modal.innerHTML = `
           <div class="modal-content" style="max-width: 610px; width: 96vw; background: rgba(255,255,255,0.95); border-radius: 1.5rem; padding: 2.4rem 2rem 2rem; box-shadow: 0 8px 32px 0 rgba(115,83,234,0.15); position: relative; overflow-y: auto; max-height: 96vh; border: 1.5px solid #f2ebfc;">
@@ -439,7 +408,7 @@ export function openModal(type, isFab = false) {
         </ul>
         <div class="modal-actions">
           <button class="modal-btn" onclick="window.location.href='${type}.html'">Learn More</button>
-          <button class="modal-btn">Ask Chattia</button>
+          <button class="modal-btn" id="ask-chattia-btn">Ask Chattia</button>
           <button class="modal-btn cta" onclick="window.location.href='contact.html'">Contact Us</button>
           <button class="modal-btn" id="cancel-btn">Cancel</button>
         </div>
@@ -447,6 +416,8 @@ export function openModal(type, isFab = false) {
     `;
     document.body.appendChild(modal);
     makeModalDraggable(document.getElementById('draggable-modal'));
+
+    document.getElementById('ask-chattia-btn').onclick = () => openChatbot();
   }
 
   // Trap focus, close events
