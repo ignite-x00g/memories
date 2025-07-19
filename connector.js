@@ -43,30 +43,5 @@ export async function openModal(type) {
   if (closeIcon) closeIcon.addEventListener('click', close);
 
   const cancelBtn = modal.querySelector('#cancel-btn');
-<<<<<<< HEAD
   if (cancelBtn) cancelBtn.addEventListener('click', close);
-=======
-  if (cancelBtn) {
-    cancelBtn.onclick = closeModal;
-  }
-  modal.onclick = e => (e.target === modal ? closeModal() : null);
-  document.addEventListener('keydown', function esc(e) {
-    if (e.key === "Escape") {
-      closeModal();
-    }
-  };
-
-  modalOverlay.querySelector('.close-modal').onclick = closeModal;
-  modalOverlay.onclick = (e) => {
-    if (e.target === modalOverlay) {
-      closeModal();
-    }
-  };
-  if (type === 'contact') {
-    modalOverlay.style.background = 'transparent';
-    const cancel = modalOverlay.querySelector('#cancel-btn');
-    if (cancel) cancel.onclick = closeModal;
-  }
-  document.addEventListener('keydown', handleEsc);
->>>>>>> main
 }
