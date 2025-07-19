@@ -79,5 +79,10 @@ async function fetchContent(url) {
       closeModal();
     }
   };
+  if (type === 'contact') {
+    modalOverlay.style.background = 'transparent';
+    const cancel = modalOverlay.querySelector('#cancel-btn');
+    if (cancel) cancel.onclick = closeModal;
+  }
   document.addEventListener('keydown', handleEsc);
 }
