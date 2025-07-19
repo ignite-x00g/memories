@@ -24,6 +24,18 @@ body.dark {
   text-align: center;
 }
 
+.page-content {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.page-content img,
+.page-content video {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /* Modal drag styles */
 .ops-modal.dragging {
   opacity: 0.95;
@@ -198,6 +210,14 @@ body.dark .card .icon > i {
   padding: 2.5rem 2.2rem 2.1rem 2.2rem;
   position: relative;
   outline: none;
+  margin-top: 50px;
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 body.dark .ops-modal {
   background: #251541;
