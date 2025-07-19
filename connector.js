@@ -11,10 +11,43 @@ async function fetchContent(url) {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return await response.text();
-  } catch (error) {
-    console.error(`Could not fetch content from ${url}:`, error);
-    return '<p>Error loading content. Please try again later.</p>';
+  } else {
+    // The language toggle button displays the active language code.
+    // When it shows "ES" the page is currently in Spanish, otherwise English.
+    const lang = document.getElementById('lang-toggle').textContent === 'ES' ? 'es' : 'en';
+    const data = modalData[type];
+    if (!data) return;
+    modal.innerHTML = `
+      <div class="ops-modal" tabindex="-1" role="dialog" aria-modal="true" id="draggable-modal" style="top:12vh; left:0; right:0; margin:auto; position:fixed;">
+        <button class="modal-x" aria-label="CERRAR" id="modal-x">X</button>
+        <div class="modal-header" style="cursor:move; user-select:none;">
+          <img class="modal-img" src="${data.img}" alt="${data.imgAlt}" />
+          <div><div class="modal-title">${translations[lang][`modal-title-${type}`]}</div></div>
+        </div>
+        <div class="modal-content">${translations[lang][`modal-content-${type}`]}</div>
+        <div class="modal-video">${data.video}</div>
+        <ul style="margin-bottom:1.2em; margin-left:1.3em;">
+          ${translations[lang][`modal-list-${type}`].map(i => `<li>${i}</li>`).join("")}
+        </ul>
+        <div class="modal-actions">
+          <button class="modal-btn cta" id="join-us-btn">Join Us</button>
+          <button class="modal-btn" id="contact-us-btn">Contact Us</button>
+          <button class="modal-btn" id="learn-more-btn">Learn More</button>
+          <button class="modal-btn" id="ask-chattia-btn">Ask Chattia</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+    makeModalDraggable(document.getElementById('draggable-modal'));
+
+    if (type === 'contactcenter') {
+      document.getElementById('join-us-btn').onclick = () => window.location.href = 'join.html';
+      document.getElementById('contact-us-btn').onclick = () => window.location.href = 'contact.html';
+      document.getElementById('learn-more-btn').onclick = () => window.location.href = 'contactcenter.html';
+      document.getElementById('ask-chattia-btn').onclick = () => openChatbot();
+    } else {
+      document.getElementById('ask-chattia-btn').onclick = () => openChatbot();
+    }
   }
 }
 
