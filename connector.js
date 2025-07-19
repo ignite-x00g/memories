@@ -372,19 +372,38 @@ export function openModal(type, isFab = false) {
           .then(content => {
             modal.innerHTML = `
               <div class="ops-modal" style="max-width:640px; width:96vw; height:auto; overflow-y: auto; max-height: 90vh;">
-                <button class="modal-x" aria-label="CERRAR" id="fab-modal-x">X</button>
                 ${content}
               </div>
             `;
             document.body.appendChild(modal);
 
+            const closeModal = () => modal.remove();
+
             // Re-add close event listeners
-            modal.querySelector('.modal-x, #fab-modal-x').onclick = () => modal.remove();
-            modal.onclick = e => (e.target === modal ? modal.remove() : null);
+            modal.querySelector('.close-modal').onclick = closeModal;
+            modal.onclick = e => (e.target === modal ? closeModal() : null);
+            document.addEventListener('keydown', function esc(e) {
+                if (e.key === "Escape") {
+                    closeModal();
+                    document.removeEventListener('keydown', esc);
+                }
+            });
 
             const fabModal = modal.querySelector('.ops-modal');
             if (fabModal) {
               makeModalDraggable(fabModal);
+            }
+
+            const contactForm = modal.querySelector('#contact-form');
+            if (contactForm) {
+              contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                // Replace with actual form submission logic
+                setTimeout(() => {
+                  alert('Form submitted successfully!');
+                  window.location.href = 'index.html';
+                }, 500);
+              });
             }
           });
     }
@@ -407,9 +426,9 @@ export function openModal(type, isFab = false) {
           ${translations[lang][`modal-list-${type}`].map(i => `<li>${i}</li>`).join("")}
         </ul>
         <div class="modal-actions">
-          <button class="modal-btn" onclick="window.location.href='${type}.html'">Learn More</button>
-          <button class="modal-btn" id="ask-chattia-btn">Ask Chattia</button>
-          <button class="modal-btn cta" onclick="window.location.href='contact.html'">Contact Us</button>
+          <button class.bind="modal-btn" onclick="openModal('join', true)">Join Us</button>
+          <button class.bind="modal-btn" onclick="openModal('contact', true)">Contact Us</button>
+          <button class="modal-btn" onclick="openModal('chat', true)">Ask Chattia</button>
           <button class="modal-btn" id="cancel-btn">Cancel</button>
         </div>
       </div>
