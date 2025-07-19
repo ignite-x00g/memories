@@ -426,17 +426,24 @@ export function openModal(type, isFab = false) {
           ${translations[lang][`modal-list-${type}`].map(i => `<li>${i}</li>`).join("")}
         </ul>
         <div class="modal-actions">
-          <button class.bind="modal-btn" onclick="openModal('join', true)">Join Us</button>
-          <button class.bind="modal-btn" onclick="openModal('contact', true)">Contact Us</button>
-          <button class="modal-btn" onclick="openModal('chat', true)">Ask Chattia</button>
-          <button class="modal-btn" id="cancel-btn">Cancel</button>
+          <button class="modal-btn cta" id="join-us-btn">Join Us</button>
+          <button class="modal-btn" id="contact-us-btn">Contact Us</button>
+          <button class="modal-btn" id="learn-more-btn">Learn More</button>
+          <button class="modal-btn" id="ask-chattia-btn">Ask Chattia</button>
         </div>
       </div>
     `;
     document.body.appendChild(modal);
     makeModalDraggable(document.getElementById('draggable-modal'));
 
-    document.getElementById('ask-chattia-btn').onclick = () => openChatbot();
+    if (type === 'contactcenter') {
+      document.getElementById('join-us-btn').onclick = () => window.location.href = 'join.html';
+      document.getElementById('contact-us-btn').onclick = () => window.location.href = 'contact.html';
+      document.getElementById('learn-more-btn').onclick = () => window.location.href = 'contactcenter.html';
+      document.getElementById('ask-chattia-btn').onclick = () => openChatbot();
+    } else {
+      document.getElementById('ask-chattia-btn').onclick = () => openChatbot();
+    }
   }
 
   // Trap focus, close events
