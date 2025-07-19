@@ -8,7 +8,7 @@ fetch('fabs.html').then(r => r.text()).then(html => {
 
   // DESKTOP FAB triggers
   const fabJoin = document.getElementById('fab-join');
-  if (fabJoin) fabJoin.onclick = () => openModal('join', true);
+  if (fabJoin) fabJoin.onclick = () => openModal('join-modal', true);
   const fabContact = document.getElementById('fab-contact');
   if (fabContact) fabContact.onclick = () => openModal('contact', true);
   const fabChat = document.getElementById('fab-chat');
@@ -16,7 +16,7 @@ fetch('fabs.html').then(r => r.text()).then(html => {
 
   // MOBILE FAB triggers
   const mobileFabJoin = document.getElementById('mobile-fab-join');
-  if (mobileFabJoin) mobileFabJoin.onclick = () => openModal('join', true);
+  if (mobileFabJoin) mobileFabJoin.onclick = () => openModal('join-modal', true);
   const mobileFabContact = document.getElementById('mobile-fab-contact');
   if (mobileFabContact) mobileFabContact.onclick = () => openModal('contact', true);
   const mobileFabChat = document.getElementById('mobile-fab-chat');
