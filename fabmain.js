@@ -1,5 +1,6 @@
 // fabmain.js
 import { openModal } from './connector.js';
+import { openChatbot } from './bot.js';
 
 // Load FABs HTML into #fab-root (if not already loaded)
 fetch('fabs.html').then(r => r.text()).then(html => {
@@ -11,7 +12,7 @@ fetch('fabs.html').then(r => r.text()).then(html => {
   const fabContact = document.getElementById('fab-contact');
   if (fabContact) fabContact.onclick = () => openModal('contact', true);
   const fabChat = document.getElementById('fab-chat');
-  if (fabChat) fabChat.onclick = () => openModal('chat', true);
+  if (fabChat) fabChat.onclick = () => openChatbot();
 
   // MOBILE FAB triggers
   const mobileFabJoin = document.getElementById('mobile-fab-join');
@@ -19,7 +20,7 @@ fetch('fabs.html').then(r => r.text()).then(html => {
   const mobileFabContact = document.getElementById('mobile-fab-contact');
   if (mobileFabContact) mobileFabContact.onclick = () => openModal('contact', true);
   const mobileFabChat = document.getElementById('mobile-fab-chat');
-  if (mobileFabChat) mobileFabChat.onclick = () => openModal('chat');
+  if (mobileFabChat) mobileFabChat.onclick = () => openChatbot();
 
   // Accordion nav open/close logic
   const accordionBtn = document.getElementById('mobile-fab-services');
