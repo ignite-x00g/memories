@@ -426,9 +426,10 @@ export function openModal(type, isFab = false) {
           ${translations[lang][`modal-list-${type}`].map(i => `<li>${i}</li>`).join("")}
         </ul>
         <div class="modal-actions">
-          <button class.bind="modal-btn" onclick="openModal('join', true)">Join Us</button>
-          <button class.bind="modal-btn" onclick="openModal('contact', true)">Contact Us</button>
-          <button class="modal-btn" onclick="openModal('chat', true)">Ask Chattia</button>
+          <button class="modal-btn cta" id="join-us-btn">Join Us</button>
+          <button class="modal-btn cta" id="contact-us-btn">Contact Us</button>
+          <a href="professionals.html" class="modal-btn">Learn More</a>
+          <button class="modal-btn" id="ask-chattia-btn">Ask Chattia</button>
           <button class="modal-btn" id="cancel-btn">Cancel</button>
         </div>
       </div>
@@ -436,12 +437,21 @@ export function openModal(type, isFab = false) {
     document.body.appendChild(modal);
     makeModalDraggable(document.getElementById('draggable-modal'));
 
+    document.getElementById('join-us-btn').onclick = () => openModal('join', true);
+    document.getElementById('contact-us-btn').onclick = () => openModal('contact', true);
     document.getElementById('ask-chattia-btn').onclick = () => openChatbot();
   }
 
   // Trap focus, close events
   const closeModal = () => modal.remove();
-  modal.querySelector('.modal-x, #fab-modal-x, #cancel-btn').onclick = closeModal;
+  const modalX = modal.querySelector('.modal-x');
+  if (modalX) {
+    modalX.onclick = closeModal;
+  }
+  const cancelBtn = modal.querySelector('#cancel-btn');
+  if (cancelBtn) {
+    cancelBtn.onclick = closeModal;
+  }
   modal.onclick = e => (e.target === modal ? closeModal() : null);
   document.addEventListener('keydown', function esc(e) {
     if (e.key === "Escape") {
