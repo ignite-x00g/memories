@@ -30,24 +30,26 @@ async function fetchContent(url) {
           ${translations[lang][`modal-list-${type}`].map(i => `<li>${i}</li>`).join("")}
         </ul>
         <div class="modal-actions">
-          <button class="modal-btn cta" id="join-us-btn">Join Us</button>
-          <button class="modal-btn" id="contact-us-btn">Contact Us</button>
-          <button class="modal-btn" id="learn-more-btn">Learn More</button>
+          <a href="contact/contact.html" class="modal-btn cta">Contact Us</a>
+          <a href="join.html" class="modal-btn cta">Join Us</a>
+          <a href="itsupport.html" class="modal-btn">Learn More</a>
           <button class="modal-btn" id="ask-chattia-btn">Ask Chattia</button>
         </div>
       </div>
     `;
     document.body.appendChild(modal);
     makeModalDraggable(document.getElementById('draggable-modal'));
-
-    if (type === 'contactcenter') {
-      document.getElementById('join-us-btn').onclick = () => window.location.href = 'join.html';
-      document.getElementById('contact-us-btn').onclick = () => window.location.href = 'contact.html';
-      document.getElementById('learn-more-btn').onclick = () => window.location.href = 'contactcenter.html';
-      document.getElementById('ask-chattia-btn').onclick = () => openChatbot();
-    } else {
-      document.getElementById('ask-chattia-btn').onclick = () => openChatbot();
-    }
+    document.getElementById('ask-chattia-btn').onclick = () => openChatbot();
+    const closeModal = () => modal.remove();
+    modal.querySelector('.modal-x').onclick = closeModal;
+    modal.onclick = e => (e.target === modal ? closeModal() : null);
+    const escListener = (e) => {
+        if (e.key === "Escape") {
+            closeModal();
+            document.removeEventListener('keydown', escListener);
+        }
+    };
+    document.addEventListener('keydown', escListener);
   }
 }
 
@@ -57,7 +59,6 @@ async function fetchContent(url) {
  */
 export async function openModal(modalName) {
   const modalContent = await fetchContent(`${modalName}.html`);
-
   const modalOverlay = document.createElement('div');
   modalOverlay.className = 'modal-overlay';
   modalOverlay.innerHTML = `
@@ -68,7 +69,6 @@ export async function openModal(modalName) {
   `;
 
   document.body.appendChild(modalOverlay);
-
   const closeModal = () => {
     modalOverlay.remove();
     document.removeEventListener('keydown', handleEsc);
