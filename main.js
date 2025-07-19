@@ -7,11 +7,11 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('card-business').onclick = () =>
     openModal('business-modal');
   document.getElementById('card-contactcenter').onclick = () =>
-    openModal('contactcenter');
+    openModal('contactcenter-modal');
   document.getElementById('card-itsupport').onclick = () =>
-    openModal('itsupport');
+    openModal('itsupport-modal');
   document.getElementById('card-professionals').onclick = () =>
-    openModal('professionals');
+    openModal('professionals-modal');
   // Language and Theme toggles
   document.getElementById('lang-toggle').onclick = () =>
     window.dispatchEvent(new Event('toggle-lang'));
