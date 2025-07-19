@@ -14,7 +14,7 @@ async function fetchContent(url) {
  * @param {string} type - modal identifier
  */
 export async function openModal(type, overlayOnly = false) {
-  const url = type === 'contact' ? 'contact/contact.html' : `${type}.html`;
+  const url = type === 'contact' ? 'contact.html' : `${type}.html`;
   const html = await fetchContent(url);
 
   const wrapper = document.createElement('div');
