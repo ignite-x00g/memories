@@ -30,15 +30,18 @@ async function fetchContent(url) {
           ${translations[lang][`modal-list-${type}`].map(i => `<li>${i}</li>`).join("")}
         </ul>
         <div class="modal-actions">
-          <a href="contact/contact.html" class="modal-btn cta">Contact Us</a>
-          <a href="join.html" class="modal-btn cta">Join Us</a>
-          <a href="itsupport.html" class="modal-btn">Learn More</a>
+          <button class="modal-btn cta" id="join-us-btn">Join Us</button>
+          <button class="modal-btn cta" id="contact-us-btn">Contact Us</button>
+          <a href="professionals.html" class="modal-btn">Learn More</a>
           <button class="modal-btn" id="ask-chattia-btn">Ask Chattia</button>
+          <button class="modal-btn" id="cancel-btn">Cancel</button>
         </div>
       </div>
     `;
     document.body.appendChild(modal);
     makeModalDraggable(document.getElementById('draggable-modal'));
+    document.getElementById('join-us-btn').onclick = () => openModal('join', true);
+    document.getElementById('contact-us-btn').onclick = () => openModal('contact', true);
     document.getElementById('ask-chattia-btn').onclick = () => openChatbot();
     const closeModal = () => modal.remove();
     modal.querySelector('.modal-x').onclick = closeModal;
@@ -53,29 +56,19 @@ async function fetchContent(url) {
   }
 }
 
-/**
- * Creates and displays a modal with the given content.
- * @param {string} modalName - The name of the modal to open.
- */
-export async function openModal(modalName) {
-  const modalContent = await fetchContent(`${modalName}.html`);
-  const modalOverlay = document.createElement('div');
-  modalOverlay.className = 'modal-overlay';
-  modalOverlay.innerHTML = `
-    <div class="modal-content">
-      <button class="close-modal" aria-label="Close">&times;</button>
-      ${modalContent}
-    </div>
-  `;
-
-  document.body.appendChild(modalOverlay);
-  const closeModal = () => {
-    modalOverlay.remove();
-    document.removeEventListener('keydown', handleEsc);
-  };
-
-  const handleEsc = (e) => {
-    if (e.key === 'Escape') {
+  // Trap focus, close events
+  const closeModal = () => modal.remove();
+  const modalX = modal.querySelector('.modal-x');
+  if (modalX) {
+    modalX.onclick = closeModal;
+  }
+  const cancelBtn = modal.querySelector('#cancel-btn');
+  if (cancelBtn) {
+    cancelBtn.onclick = closeModal;
+  }
+  modal.onclick = e => (e.target === modal ? closeModal() : null);
+  document.addEventListener('keydown', function esc(e) {
+    if (e.key === "Escape") {
       closeModal();
     }
   };
