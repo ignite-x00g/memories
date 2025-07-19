@@ -7,11 +7,13 @@
   <link rel="stylesheet" href="global.css">
   <link rel="stylesheet" href="fabs.css">
 </head>
-<body>
-  <script type="module">
-    import { openModal } from './connector.js';
-    window.addEventListener('DOMContentLoaded', () => openModal('join'));
-  </script>
-  <script type="module" src="bot.js"></script>
-</body>
+  <body>
+    <script type="module">
+      import { openModal } from './connector.js';
+      window.addEventListener('DOMContentLoaded', () => openModal('join'));
+    </script>
+    <div id="fab-root"></div>
+    <script type="module" src="fabmain.js"></script>
+    <script type="module" src="bot.js"></script>
+  </body>
 </html>
