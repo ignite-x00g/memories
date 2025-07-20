@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OPS Online Support</title>
     <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="components/modals/modal-styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
@@ -24,121 +25,62 @@
     </header>
 
     <main class="grid-container">
-        <div class="card" data-modal="ops">
+        <div class="card" data-modal="business-modal">
             <h2 class="title">Business Operations</h2>
             <span class="icon">&#128188;</span>
             <p class="content">Optimice sus procesos para obtener la máxima eficiencia.</p>
         </div>
-        <div class="card" data-modal="cc">
+        <div class="card" data-modal="contactcenter-modal">
             <h2 class="title">Contact Center</h2>
             <span class="icon">&#128222;</span>
             <p class="content">Mejore la satisfacción del cliente con nuestro soporte experto.</p>
         </div>
-        <div class="card" data-modal="it">
+        <div class="card" data-modal="itsupport-modal">
             <h2 class="title">IT Support</h2>
             <span class="icon">&#128187;</span>
             <p class="content">Asistencia técnica confiable para mantener sus sistemas en funcionamiento.</p>
         </div>
-        <div class="card" data-modal="pro">
+        <div class="card" data-modal="professionals-modal">
             <h2 class="title">Professionals</h2>
             <span class="icon">&#128100;</span>
             <p class="content">Conéctese con nuestro equipo de profesionales certificados.</p>
         </div>
-
+    </main>
+  
     <footer>
         <p>© 2025 OPS Online Support.</p>
     </footer>
-        
-         <script>
-        const toggles = document.querySelectorAll('.toggle');
-        toggles.forEach(toggle => {
-            toggle.addEventListener('click', () => {
-                if (toggle.textContent === 'Dark') {
-                    document.body.classList.toggle('dark-mode');
-                }
-                // Placeholder for ES toggle functionality
-                if (toggle.textContent === 'ES') {
-                    alert('Language toggle clicked!');
-                }
-            });
+
+    <!-- Include Modals -->
+    <div id="business-modal-placeholder"></div>
+    <div id="contactcenter-modal-placeholder"></div>
+    <div id="itsupport-modal-placeholder"></div>
+    <div id="professionals-modal-placeholder"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('components/modals/business-modal.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('business-modal-placeholder').innerHTML = data;
+                });
+            fetch('components/modals/contactcenter-modal.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('contactcenter-modal-placeholder').innerHTML = data;
+                });
+            fetch('components/modals/itsupport-modal.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('itsupport-modal-placeholder').innerHTML = data;
+                });
+            fetch('components/modals/professionals-modal.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('professionals-modal-placeholder').innerHTML = data;
+                });
         });
-
-        // Add a simple dark theme
-        const style = document.createElement('style');
-        style.innerHTML = `
-            .dark-mode {
-                background: #121212;
-                color: #fff;
-            }
-            .dark-mode .header, .dark-mode .main-content {
-                background-color: #121212;
-            }
-            .dark-mode .card {
-                background-color: #1e1e1e;
-                color: #fff;
-            }
-            .dark-mode .nav a {
-                color: #fff;
-            }
-            .dark-mode .card-description {
-                color: #aaa;
-            }
-        `;
-        document.head.appendChild(style);
-        const cards = document.querySelectorAll('.card');
-
-        const openModal = (modalId) => {
-            const modal = document.getElementById(modalId);
-            modal.style.display = 'block';
-        }
-
-        cards.forEach(card => {
-            card.addEventListener('click', () => {
-                const title = card.querySelector('.card-title').textContent;
-                if(title === 'Business Operations') {
-                    openModal('business-modal');
-                } else if(title === 'Contact Center') {
-                    openModal('contactcenter-modal');
-                } else if(title === 'IT Support') {
-                    openModal('itsupport-modal');
-                } else if(title === 'Professionals') {
-                    openModal('professionals-modal');
-                }
-            });
-        });
-
-        const closeBtns = document.querySelectorAll('[data-close]');
-        closeBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const modal = btn.closest('.modal-overlay');
-                modal.style.display = 'none';
-            });
-        });
-        
-        // Make modals draggable
-        const modals = document.querySelectorAll('.ops-modal');
-        modals.forEach(modal => {
-          const header = modal.querySelector('.modal-header');
-          let isDragging = false;
-          let offsetX, offsetY;
-          header.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            offsetX = e.clientX - modal.offsetLeft;
-            offsetY = e.clientY - modal.offsetTop;
-            modal.style.cursor = 'grabbing';
-            modal.parentElement.style.zIndex = 1001;
-          });
-
-          document.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            modal.style.left = `${e.clientX - offsetX}px`;
-            modal.style.top = `${e.clientY - offsetY}px`;
-          });
-
-          document.addEventListener('mouseup', () => {
-            isDragging = false;
-            modal.style.cursor = 'grab';
-            modal.parentElement.style.zIndex = 1000;
-    <script type="module" src="js/main.js"></script>  
+    </script>
+    <script src="js/fabmain.js"></script>
 </body>
 </html>
