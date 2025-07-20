@@ -257,7 +257,6 @@
     </style>
 </head>
 <body>
-
     <header class="header">
         <div class="logo">OPS</div>
         <nav class="nav">
@@ -338,7 +337,6 @@
     <footer class="footer">
         <p>© 2025 OPS Online Support.</p>
     </footer>
-
     <section id="contact-form" class="main-content">
         <h2>Contact Us</h2>
         <p>This is a placeholder for the contact form.</p>
@@ -380,14 +378,12 @@
             }
         `;
         document.head.appendChild(style);
-
         const modalContainer = document.getElementById('modal-container');
         const modalTitle = document.getElementById('modal-title');
         const modalDescriptionTop = document.getElementById('modal-description-top');
         const modalList = document.getElementById('modal-list');
         const closeBtn = document.querySelector('.close-btn');
         const cards = document.querySelectorAll('.card');
-
         let currentLanguage = 'en';
 
         const modalData = {
@@ -492,7 +488,6 @@
         closeBtn.addEventListener('click', () => {
             modalContainer.style.display = 'none';
         });
-
         window.addEventListener('click', (event) => {
             if (event.target == modalContainer) {
                 modalContainer.style.display = 'none';
