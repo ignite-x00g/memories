@@ -40,3 +40,44 @@ qsa('#joinModal .form-section').forEach(section=>{
 /* ---------- Simple submit stubs ---------- */
 qs('#joinForm').onsubmit=e=>{e.preventDefault();alert('Join form submitted');qs('#joinModal').classList.remove('active')};
 qs('#contactForm').onsubmit=e=>{e.preventDefault();alert('Contact form submitted');qs('#contactModal').classList.remove('active')};
+
+/* ---------- FABs & Modals ---------- */
+const fabs = qsa('.fab');
+const modals = qsa('.modal-overlay');
+const closeButtons = qsa('.close-modal');
+
+fabs.forEach(fab => {
+  fab.onclick = () => {
+    const modalId = fab.dataset.modal;
+    qs(`#${modalId}`).classList.add('active');
+  };
+});
+
+const closeModal = (modal) => {
+  modal.classList.remove('active');
+};
+
+closeButtons.forEach(button => {
+  button.onclick = () => {
+    const modal = button.closest('.modal-overlay');
+    closeModal(modal);
+  };
+});
+
+modals.forEach(modal => {
+  modal.onclick = (e) => {
+    if (e.target === modal) {
+      closeModal(modal);
+    }
+  };
+});
+
+document.onkeydown = (e) => {
+  if (e.key === "Escape") {
+    modals.forEach(modal => {
+      if (modal.classList.contains('active')) {
+        closeModal(modal);
+      }
+    });
+  }
+};

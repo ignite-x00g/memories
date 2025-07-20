@@ -15,11 +15,11 @@ document.querySelectorAll('.card').forEach(card => {
 });
 
 // FAB handlers
-document.getElementById('fab-join').onclick = openJoinModal;
-document.getElementById('fab-contact').onclick = openContactModal;
+// document.getElementById('fab-join').onclick = openJoinModal;
+// document.getElementById('fab-contact').onclick = openContactModal;
 document.getElementById('fab-chat').onclick = openChatbot;
-document.getElementById('mobile-fab-join').onclick = openJoinModal;
-document.getElementById('mobile-fab-contact').onclick = openContactModal;
+// document.getElementById('mobile-fab-join').onclick = openJoinModal;
+// document.getElementById('mobile-fab-contact').onclick = openContactModal;
 document.getElementById('mobile-fab-chat').onclick = openChatbot;
 
 // Services accordion (mobile)
