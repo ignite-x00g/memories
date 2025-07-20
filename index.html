@@ -2,48 +2,65 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>OPS Online Support • Structure Prototype</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="OPS Online Support structure prototype and navigation">
-  <meta name="robots" content="index, follow">
-    <!-- Font Awesome -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com; form-action 'self'; object-src 'none'; base-uri 'self';">
-  <link rel="stylesheet" href="../css/global.css">
-  <link rel="stylesheet" href="../css/fabs.css">
-  <link rel="stylesheet" href="../css/bot.css">
+  <title>OPS Unified Portal</title>
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/fabs.css">
+  <link rel="stylesheet" href="css/bot.css">
 </head>
 <body>
-  <!-- NAVIGATION -->
+  <!-- NAV -->
   <nav class="ops-nav">
-    <span class="ops-logo">OPS</span>
-    <div class="nav-links"></div>
+    <a href="index.html" class="ops-logo">OPS</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="business.html">Business Operations</a>
+      <a href="contactcenter.html">Contact Center</a>
+      <a href="itsupport.html">IT Support</a>
+      <a href="professionals.html">Professionals</a>
+    </div>
     <div class="toggles">
-      <button role="button" class="toggle-btn" id="lang-toggle">EN</button>
-      <button role="button" class="toggle-btn" id="theme-toggle">Dark</button>
+      <button id="lang-toggle" class="toggle-btn">ES</button>
+      <button id="theme-toggle" class="toggle-btn">Dark</button>
     </div>
   </nav>
 
-  <!-- CARD GRID -->
-  <main>
-    <div class="grid-container"></div>
-  </main>
+  <!-- CARDS GRID -->
+  <div class="grid-container">
+    <div class="card" id="card-ops"></div>
+    <div class="card" id="card-cc"></div>
+    <div class="card" id="card-it"></div>
+    <div class="card" id="card-pro"></div>
+  </div>
 
-  <!-- FABs loaded via fabs.html -->
-  <div id="fab-root"></div>
+  <!-- FABs -->
+  <div class="fab-stack">
+    <button id="fab-join"   class="fab-btn" title="Join Us"><i class="fa-thin fa-user-plus"></i></button>
+    <button id="fab-contact" class="fab-btn" title="Contact Us"><i class="fa-thin fa-envelope"></i></button>
+    <button id="fab-chat"    class="fab-btn" title="Chatbot"><i class="fa-thin fa-comment-alt"></i></button>
+  </div>
 
-  <!-- Modals loaded dynamically via JS -->
+  <!-- Mobile Accordion -->
+  <div class="mobile-accordion-nav">
+    <button id="mobile-fab-join"   class="fab-btn" title="Join Us"><i class="fa-thin fa-user-plus"></i></button>
+    <button id="mobile-fab-contact" class="fab-btn" title="Contact Us"><i class="fa-thin fa-envelope"></i></button>
+    <button id="mobile-fab-chat"    class="fab-btn" title="Chatbot"><i class="fa-thin fa-comment-alt"></i></button>
+    <button id="mobile-fab-services" class="fab-btn"><i class="fa-thin fa-cogs"></i></button>
+    <div id="mobile-panel-services" class="accordion-panel">
+      <a href="business-operations.html">Business Operations</a>
+      <a href="contactcenter.html">Contact Center</a>
+      <a href="itsupport.html">IT Support</a>
+      <a href="professionals.html">Professionals</a>
+      <button id="mobile-lang-toggle" class="toggle-btn">ES</button>
+      <button id="mobile-theme-toggle" class="toggle-btn">Dark</button>
+    </div>
+  </div>
 
-  <footer>
-    © 2025 OPS Online Support
-  </footer>
-  <script type="module" src="../js/connector.js"></script>
-  <script type="module" src="../js/central.js"></script>
-  <script type="module" src="../js/main.js"></script>
-  <script type="module" src="../js/fabmain.js"></script>
-  <script type="module" src="../js/bot.js"></script>
-  <script type="module">
-    import { sanitizeForms } from '../js/security.js';
-    sanitizeForms();
-  </script>
+  <div id="modal-root"></div>
+  <footer>© 2025 OPS Online Support</footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/bot.js"></script>
+  <script src="js/fabmain.js"></script>
 </body>
 </html>
