@@ -195,6 +195,9 @@ body.dark .modal-content, body.dark .ops-modal {
   background: #2a2540;
   color: #fafbfe;
 }
+.modal-content, .ops-modal {
+  color: #333;
+}
 .modal-header {
   display: flex;
   align-items: center;
