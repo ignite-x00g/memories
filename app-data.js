@@ -16,10 +16,10 @@ export const services = {
         learn: "business-operations.html"
       }
     },
-    es: { title: "OPERACIONES EMPRESARIALES", icon: '<i class="fa-thin fa-briefcase"></i>',
+    es: { title: "Gestion", icon: '<i class="fa-thin fa-briefcase"></i>',
       desc: "Optimice procesos, mejore eficiencia, asegure cumplimiento y escale su empresa.",
       modal: {
-        title: "Operaciones Empresariales",
+        title: "Gestion",
         img: "https://placehold.co/96x96?text=OPS",
         imgAlt: "Operaciones Empresariales",
         content: "Optimizamos flujos de trabajo, logística e implementamos marcos de riesgo y cumplimiento.",
