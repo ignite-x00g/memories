@@ -4,22 +4,14 @@ import { openChatbot } from './bot.js';
 
 let lang = 'en', theme = 'light';
 
-// Render cards
-function renderCards() {
-  Object.entries(services).forEach(([key, value]) => {
-    const c = value[lang];
-    document.getElementById(`card-${key}`).innerHTML = `
-        <div class="title">${c.title}</div>
-        <div class="icon">${c.icon}</div>
-        <div class="content"><p>${c.desc}</p></div>
-      `;
-  });
-}
-renderCards();
-
 // Card click → service modal
-Object.keys(services).forEach(key => {
-    document.getElementById(`card-${key}`).onclick = () => openServiceModal(key);
+document.querySelectorAll('.card').forEach(card => {
+    card.onclick = () => {
+        const modalKey = card.getAttribute('data-modal');
+        if (modalKey) {
+            openServiceModal(modalKey);
+        }
+    };
 });
 
 // FAB handlers
@@ -39,7 +31,6 @@ document.getElementById('mobile-fab-services').onclick = () => {
 function setLang(l) {
     lang = l;
     window.dispatchEvent(new CustomEvent('lang-changed', { detail: { lang: l } }));
-    renderCards();
 }
 function setTheme(t) {
     theme = t;

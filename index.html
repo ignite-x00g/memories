@@ -11,9 +11,11 @@
     <header class="ops-nav">
         <a href="#" class="ops-logo">OPS</a>
         <nav class="nav-links">
-            <a href="pages/business.html">Business Operations</a>
-            <a href="pages/contactcenter.html">Contact Center</a>
-            <a href="pages/itsupport.html">IT Support</a>
+            <a href="#" class="nav-link">Home</a>
+            <a href="pages/business.html" class="nav-link">Business Operations</a>
+            <a href="pages/contactcenter.html" class="nav-link">Contact Center</a>
+            <a href="pages/itsupport.html" class="nav-link">IT Support</a>
+            <a href="pages/professionals.html" class="nav-link">Professionals</a>
         </nav>
         <div class="toggles">
             <button class="toggle-btn" id="lang-toggle">ES</button>
@@ -22,77 +24,30 @@
     </header>
 
     <main class="grid-container">
-        <div class="card">
+        <div class="card" data-modal="ops">
             <h2 class="title">Business Operations</h2>
             <span class="icon">&#128188;</span>
             <p class="content">Optimice sus procesos para obtener la máxima eficiencia.</p>
         </div>
-        <div class="card">
+        <div class="card" data-modal="cc">
             <h2 class="title">Contact Center</h2>
             <span class="icon">&#128222;</span>
             <p class="content">Mejore la satisfacción del cliente con nuestro soporte experto.</p>
         </div>
-        <div class="card">
+        <div class="card" data-modal="it">
             <h2 class="title">IT Support</h2>
             <span class="icon">&#128187;</span>
             <p class="content">Asistencia técnica confiable para mantener sus sistemas en funcionamiento.</p>
         </div>
-        <div class="card">
+        <div class="card" data-modal="pro">
             <h2 class="title">Professionals</h2>
             <span class="icon">&#128100;</span>
             <p class="content">Conéctese con nuestro equipo de profesionales certificados.</p>
         </div>
     </main>
-    <div class="fab-stack">
-        <div class="fab"><span>+</span></div>
-        <div class="fab"><span>&#9993;</span></div>
-        <div class="fab"><span>&#128172;</span></div>
-    </div>
-    <div class="modal-overlay" id="business-modal" style="display:none;">
-        <div class="ops-modal">
-          <button class="modal-x" data-close aria-label="Close">&times;</button>
-          <div class="modal-header">
-            <h3 data-es="Operaciones de Negocio">Business Operations</h3>
-          </div>
-          <div class="modal-body centered">
-          <img src="https://via.placeholder.com/700x300" alt="Image placeholder" style="width:100%; height:auto;">
-          <p>
-            Optimize, secure, and scale your core processes with OPS Business Operations.<br>
-            <strong>Servicios:</strong>
-          </p>
-          <ul>
-            <li>Digitalización y automatización del flujo de trabajo</li>
-            <li>Estrategias de eficiencia logística e inventario</li>
-            <li>Marcos de riesgo y cumplimiento (alineados a NIST, ISO, CISA)</li>
-            <li>Cuadros de métricas de rendimiento y análisis</li>
-            <li>Capacitación remota y operaciones Lean</li>
-          </ul>
-          <div style="text-align:center; margin: 2em 0;">
-            <video width="560" height="315" controls style="width:100%; max-width:560px;">
-              <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-          </div>
-             <p>
-              Content Here
-             Content Here
-             Content Here
-             Content Here
-             Content Here
-             Content Here
-             Content Here
-             Content Here
-            </p>
-          </div>
-          <div class="modal-actions">
-            <button class="modal-btn cta" onclick="openModal('contact')">Contact Us</button>
-            <button class="modal-btn primary" onclick="openModal('join-modal')">Join Us</button>
-            <a href="business.html" class="modal-btn">Learn More</a>
-            <button class="modal-btn" onclick="openChatbot()">Ask Chattia</button>
-          </div>
-          </div>
-        </div>
-    <div class="modal-overlay" id="contactcenter-modal" style="display:none;">
+    <div id="fab-container"></div>
+    <div id="modal-root"></div>
+    <div id="modal-container" class="modal-backdrop" style="display: none;">
         <div class="ops-modal">
           <button class="modal-x" data-close aria-label="Close">&times;</button>
           <div class="modal-header">
@@ -223,7 +178,6 @@
         </div>
         </div>
 
-
     <footer class="footer">
         <p>© 2025 OPS Online Support.</p>
     </footer>
@@ -317,8 +271,6 @@
             isDragging = false;
             modal.style.cursor = 'grab';
             modal.parentElement.style.zIndex = 1000;
-
     <script type="module" src="js/main.js"></script>
-
 </body>
 </html>
