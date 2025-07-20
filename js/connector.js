@@ -15,7 +15,7 @@ async function fetchContent(url) {
  */
 export async function openModal(type, overlayOnly = false) {
   if (document.querySelector('.modal-overlay')) return; // prevent duplicate modals
-  const url = type === 'contact' ? 'contact.html' : `${type}.html`;
+  const url = type === 'contact' ? '../pages/contact.html' : `../components/modals/${type}.html`;
   const html = await fetchContent(url);
 
   const wrapper = document.createElement('div');
@@ -48,7 +48,7 @@ export async function openModal(type, overlayOnly = false) {
   overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
   document.addEventListener('keydown', onEsc);
 
-  const closeIcon = overlay.querySelector('[data-close]');
+  const closeIcon = overlay.querySelector('.modal-x');
   if (closeIcon) closeIcon.addEventListener('click', close);
 
   const cancelBtn = overlay.querySelector('#cancel-btn');
