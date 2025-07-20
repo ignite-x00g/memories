@@ -44,6 +44,96 @@
             <span class="icon">&#128100;</span>
             <p class="content">Conéctese con nuestro equipo de profesionales certificados.</p>
         </div>
-   
+         <script>
+        const toggles = document.querySelectorAll('.toggle');
+        toggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                if (toggle.textContent === 'Dark') {
+                    document.body.classList.toggle('dark-mode');
+                }
+                // Placeholder for ES toggle functionality
+                if (toggle.textContent === 'ES') {
+                    alert('Language toggle clicked!');
+                }
+            });
+        });
+
+        // Add a simple dark theme
+        const style = document.createElement('style');
+        style.innerHTML = `
+            .dark-mode {
+                background: #121212;
+                color: #fff;
+            }
+            .dark-mode .header, .dark-mode .main-content {
+                background-color: #121212;
+            }
+            .dark-mode .card {
+                background-color: #1e1e1e;
+                color: #fff;
+            }
+            .dark-mode .nav a {
+                color: #fff;
+            }
+            .dark-mode .card-description {
+                color: #aaa;
+            }
+        `;
+        document.head.appendChild(style);
+        const cards = document.querySelectorAll('.card');
+
+        const openModal = (modalId) => {
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'block';
+        }
+
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                const title = card.querySelector('.card-title').textContent;
+                if(title === 'Business Operations') {
+                    openModal('business-modal');
+                } else if(title === 'Contact Center') {
+                    openModal('contactcenter-modal');
+                } else if(title === 'IT Support') {
+                    openModal('itsupport-modal');
+                } else if(title === 'Professionals') {
+                    openModal('professionals-modal');
+                }
+            });
+        });
+
+        const closeBtns = document.querySelectorAll('[data-close]');
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const modal = btn.closest('.modal-overlay');
+                modal.style.display = 'none';
+            });
+        });
+        
+        // Make modals draggable
+        const modals = document.querySelectorAll('.ops-modal');
+        modals.forEach(modal => {
+          const header = modal.querySelector('.modal-header');
+          let isDragging = false;
+          let offsetX, offsetY;
+          header.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            offsetX = e.clientX - modal.offsetLeft;
+            offsetY = e.clientY - modal.offsetTop;
+            modal.style.cursor = 'grabbing';
+            modal.parentElement.style.zIndex = 1001;
+          });
+
+          document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            modal.style.left = `${e.clientX - offsetX}px`;
+            modal.style.top = `${e.clientY - offsetY}px`;
+          });
+
+          document.addEventListener('mouseup', () => {
+            isDragging = false;
+            modal.style.cursor = 'grab';
+            modal.parentElement.style.zIndex = 1000;
+    <script type="module" src="js/main.js"></script>  
 </body>
 </html>
