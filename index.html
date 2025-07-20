@@ -1,66 +1,509 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OPS Unified Portal</title>
-  <link rel="stylesheet" href="css/global.css">
-  <link rel="stylesheet" href="css/fabs.css">
-  <link rel="stylesheet" href="css/bot.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPS Online Support</title>
+    <style>
+        :root {
+            --clr-primary: #ff00ff;
+            --clr-accent: #00c4ff;
+            --bg-light: #f5f9ff;
+            --clr-footer: #251541;
+            --font-body: system-ui, sans-serif;
+            --font-weight-body: 400;
+            --font-weight-heading: 600;
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-weight: var(--font-weight-body);
+            background: linear-gradient(to bottom, white, var(--bg-light));
+            margin: 0;
+            color: #333;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: transparent;
+        }
+
+        .logo {
+            color: var(--clr-primary);
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: var(--font-weight-heading);
+        }
+
+        .toggles {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .toggle {
+            background-color: var(--clr-accent);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            cursor: pointer;
+        }
+
+        .footer {
+            background-color: var(--clr-footer);
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .main-content {
+            padding: 2rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+        }
+
+        .card-icon {
+            /* Placeholder for icon */
+            height: 40px;
+            width: 40px;
+            background-color: #eee;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+        }
+
+        .card-title {
+            font-variant: small-caps;
+            font-weight: var(--font-weight-heading);
+            font-size: 1.25rem;
+        }
+
+        .card-description {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .card-underline {
+            width: 40px;
+            height: 4px;
+            margin: 0 auto;
+        }
+
+        .card:nth-child(odd) .card-underline {
+            background-color: var(--clr-primary);
+        }
+
+        .card:nth-child(even) .card-underline {
+            background-color: var(--clr-accent);
+        }
+
+        .fab-stack {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .fab {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--clr-primary), var(--clr-accent));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+
+        .modal-container {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 16px;
+            position: relative;
+        }
+
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .modal-section {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .placeholder-image, .placeholder-video {
+            width: 150px;
+            height: 100px;
+            background-color: #eee;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: space-around;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+            margin-top: 1rem;
+        }
+
+        .cta-button {
+            background-color: var(--clr-primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+
+            .header {
+                justify-content: space-between;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .fab-stack {
+                right: 1rem;
+                bottom: 5rem;
+                top: auto;
+                transform: none;
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- NAV -->
-  <nav class="ops-nav">
-    <a href="index.html" class="ops-logo">OPS</a>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="business.html">Business Operations</a>
-      <a href="contactcenter.html">Contact Center</a>
-      <a href="itsupport.html">IT Support</a>
-      <a href="professionals.html">Professionals</a>
+
+    <header class="header">
+        <div class="logo">OPS</div>
+        <nav class="nav">
+            <a href="#business-operations">Business Operations</a>
+            <a href="#contact-center">Contact Center</a>
+            <a href="#it-support">IT Support</a>
+            <a href="#professionals">Professionals</a>
+        </nav>
+        <div class="toggles">
+            <div class="toggle" id="lang-toggle">ES</div>
+            <div class="toggle">Dark</div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section id="business-operations" class="card-grid">
+            <div class="card">
+                <div class="card-icon"></div>
+                <h2 class="card-title">Business Operations</h2>
+                <p class="card-description">Optimice sus procesos para obtener la máxima eficiencia.</p>
+                <div class="card-underline"></div>
+            </div>
+        </section>
+        <section id="contact-center" class="card-grid">
+            <div class="card">
+                <div class="card-icon"></div>
+                <h2 class="card-title">Contact Center</h2>
+                <p class="card-description">Mejore la satisfacción del cliente con nuestro soporte experto.</p>
+                <div class="card-underline"></div>
+            </div>
+        </section>
+        <section id="it-support" class="card-grid">
+            <div class="card">
+                <div class="card-icon"></div>
+                <h2 class="card-title">IT Support</h2>
+                <p class="card-description">Asistencia técnica confiable para mantener sus sistemas en funcionamiento.</p>
+                <div class="card-underline"></div>
+            </div>
+        </section>
+        <section id="professionals" class="card-grid">
+            <div class="card">
+                <div class="card-icon"></div>
+                <h2 class="card-title">Professionals</h2>
+                <p class="card-description">Conéctese con nuestro equipo de profesionales certificados.</p>
+                <div class="card-underline"></div>
+            </div>
+        </section>
+    </main>
+
+    <div class="fab-stack">
+        <div class="fab"><span>+</span></div>
+        <div class="fab"><span>&#9993;</span></div>
+        <div class="fab"><span>&#128172;</span></div>
     </div>
-    <div class="toggles">
-      <button id="lang-toggle" class="toggle-btn">ES</button>
-      <button id="theme-toggle" class="toggle-btn">Dark</button>
+
+    <div id="modal-container" class="modal-container">
+        <div class="modal-content">
+            <span class="close-btn">X</span>
+            <h2 id="modal-title"></h2>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <div class="placeholder-image"></div>
+                    <p id="modal-description-top"></p>
+                </div>
+                <div class="modal-section">
+                    <div class="placeholder-video"></div>
+                    <ul id="modal-list"></ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#">Learn More</a>
+                <a href="#">Ask Chattia</a>
+                <a href="#contact-form" class="cta-button">Contact Us</a>
+            </div>
+        </div>
     </div>
-  </nav>
 
-  <!-- CARDS GRID -->
-  <div class="grid-container">
-    <div class="card" id="card-ops"></div>
-    <div class="card" id="card-cc"></div>
-    <div class="card" id="card-it"></div>
-    <div class="card" id="card-pro"></div>
-  </div>
+    <footer class="footer">
+        <p>© 2025 OPS Online Support.</p>
+    </footer>
 
-  <!-- FABs -->
-  <div class="fab-stack">
-    <button id="fab-join"   class="fab-btn" title="Join Us"><i class="fa-thin fa-user-plus"></i></button>
-    <button id="fab-contact" class="fab-btn" title="Contact Us"><i class="fa-thin fa-envelope"></i></button>
-    <button id="fab-chat"    class="fab-btn" title="Chatbot"><i class="fa-thin fa-comment-alt"></i></button>
-  </div>
+    <section id="contact-form" class="main-content">
+        <h2>Contact Us</h2>
+        <p>This is a placeholder for the contact form.</p>
+    </section>
 
-  <!-- Mobile Accordion -->
-  <div class="mobile-accordion-nav">
-    <button id="mobile-fab-join"   class="fab-btn" title="Join Us"><i class="fa-thin fa-user-plus"></i></button>
-    <button id="mobile-fab-contact" class="fab-btn" title="Contact Us"><i class="fa-thin fa-envelope"></i></button>
-    <button id="mobile-fab-chat"    class="fab-btn" title="Chatbot"><i class="fa-thin fa-comment-alt"></i></button>
-    <button id="mobile-fab-services" class="fab-btn"><i class="fa-thin fa-cogs"></i></button>
-    <div id="mobile-panel-services" class="accordion-panel">
-      <a href="business-operations.html">Business Operations</a>
-      <a href="contactcenter.html">Contact Center</a>
-      <a href="itsupport.html">IT Support</a>
-      <a href="professionals.html">Professionals</a>
-      <button id="mobile-lang-toggle" class="toggle-btn">ES</button>
-      <button id="mobile-theme-toggle" class="toggle-btn">Dark</button>
-    </div>
-  </div>
+    <script>
+        const toggles = document.querySelectorAll('.toggle');
+        toggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                if (toggle.textContent === 'Dark') {
+                    document.body.classList.toggle('dark-theme');
+                }
+                // Placeholder for ES toggle functionality
+                if (toggle.textContent === 'ES') {
+                    alert('Language toggle clicked!');
+                }
+            });
+        });
 
-  <div id="modal-root"></div>
-  <footer>© 2025 OPS Online Support</footer>
+        // Add a simple dark theme
+        const style = document.createElement('style');
+        style.innerHTML = `
+            .dark-theme {
+                background: #121212;
+                color: #fff;
+            }
+            .dark-theme .header, .dark-theme .main-content {
+                background-color: #121212;
+            }
+            .dark-theme .card {
+                background-color: #1e1e1e;
+                color: #fff;
+            }
+            .dark-theme .nav a {
+                color: #fff;
+            }
+            .dark-theme .card-description {
+                color: #aaa;
+            }
+        `;
+        document.head.appendChild(style);
 
-  <script src="js/main.js"></script>
-  <script src="js/bot.js"></script>
-  <script src="js/fabmain.js"></script>
+        const modalContainer = document.getElementById('modal-container');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDescriptionTop = document.getElementById('modal-description-top');
+        const modalList = document.getElementById('modal-list');
+        const closeBtn = document.querySelector('.close-btn');
+        const cards = document.querySelectorAll('.card');
+
+        let currentLanguage = 'en';
+
+        const modalData = {
+            "en": {
+                "Business Operations": {
+                    title: "Business Operations",
+                    description: "Detailed information about Business Operations.",
+                    list: []
+                },
+                "Contact Center": {
+                    title: "Contact Center",
+                    description: "Detailed information about our Contact Center services.",
+                    list: []
+                },
+                "IT Support": {
+                    title: "IT Support",
+                    description: "Detailed information about our IT Support.",
+                    list: []
+                },
+                "Professionals": {
+                    title: "Professionals",
+                    description: "Detailed information about our team of Professionals.",
+                    list: []
+                }
+            },
+            "es": {
+                "Business Operations": {
+                    title: "Sobre Operaciones Empresariales",
+                    description: "Contenido detallado sobre nuestros servicios de Operaciones Empresariales. Ayudamos a optimizar sus procesos, mejorar la eficiencia e impulsar el crecimiento mediante el apoyo operativo estratégico. Las áreas clave incluyen la optimización de procesos, la gestión de la cadena de suministro y el aseguramiento de la calidad.",
+                    list: [
+                        "Digitalización y automatización del flujo de trabajo",
+                        "Estrategias de eficiencia logística e inventario",
+                        "Marcos de riesgo y cumplimiento (alineados a NIST, ISO, CISA)",
+                        "Cuadros de métricas de rendimiento y análisis",
+                        "Capacitación remota y operaciones Lean"
+                    ]
+                },
+                "Contact Center": {
+                    title: "Sobre el Centro de Contacto",
+                    description: "Explore nuestras soluciones integrales de Centro de Contacto diseñadas para mejorar la satisfacción y el compromiso del cliente en todos los puntos de contacto. Ofrecemos servicios de llamadas entrantes y salientes, soporte multicanal (correo electrónico, chat, redes sociales) y análisis avanzados.",
+                    list: [
+                        "Gestión de llamadas entrantes y salientes 24/7",
+                        "Soporte por chat y correo electrónico en varios idiomas",
+                        "Integración con plataformas CRM (por ejemplo, HubSpot, Salesforce)",
+                        "Interacción en redes sociales y seguimiento de sentimiento",
+                        "Análisis de experiencia del cliente y monitoreo de calidad"
+                    ]
+                },
+                "IT Support": {
+                    title: "Sobre Soporte IT",
+                    description: "Nuestros servicios de Soporte de TI brindan asistencia confiable y oportuna para mantener sus sistemas funcionando sin problemas y de forma segura. Los servicios incluyen soporte de mesa de ayuda, monitoreo de red, servicios de ciberseguridad y gestión de infraestructura en la nube.",
+                    list: [
+                        "Soporte técnico 24/7 y solución remota de problemas",
+                        "Monitoreo en tiempo real de red y sistemas",
+                        "Auditorías de ciberseguridad, parches y detección de amenazas",
+                        "Configuración y mantenimiento de infraestructura en la nube",
+                        "Cumplimiento con NIST, CISA y políticas OPS Core CyberSec"
+                    ]
+                },
+                "Professionals": {
+                    title: "Sobre Profesionales",
+                    description: "Acceda a nuestra red de profesionales altamente cualificados y experimentados para satisfacer sus necesidades específicas de proyectos o de personal a largo plazo. Proporcionamos expertos en diversos campos, incluyendo TI, gestión de proyectos, finanzas y recursos humanos, asegurando que obtenga el talento adecuado para su negocio.",
+                    list: [
+                        "Profesionales IT remotos (SysAdmins, DevOps, Analistas)",
+                        "Gerentes de proyecto y consultores ágiles",
+                        "Profesionales de finanzas y contabilidad",
+                        "Expertos en recursos humanos y reclutamiento",
+                        "Talento validado por OPS con NDA, capacitación en cumplimiento y capacitación específica para el rol"
+                    ]
+                }
+            }
+        };
+
+        const langToggle = document.getElementById('lang-toggle');
+
+        langToggle.addEventListener('click', () => {
+            if (currentLanguage === 'en') {
+                currentLanguage = 'es';
+                langToggle.textContent = 'EN';
+            } else {
+                currentLanguage = 'en';
+                langToggle.textContent = 'ES';
+            }
+        });
+
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                const title = card.querySelector('.card-title').textContent;
+                const data = modalData[currentLanguage][title];
+                modalTitle.textContent = data.title;
+                modalDescriptionTop.textContent = data.description;
+                modalList.innerHTML = '';
+                data.list.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = item;
+                    modalList.appendChild(li);
+                });
+                modalContainer.style.display = 'block';
+            });
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modalContainer.style.display = 'none';
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target == modalContainer) {
+                modalContainer.style.display = 'none';
+            }
+        });
+
+        window.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                modalContainer.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
