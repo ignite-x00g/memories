@@ -46,12 +46,12 @@ body.dark {
   flex-grow: 1;
   gap: 2rem;
 }
-
 .nav-links a {
   text-decoration: none;
   color: inherit;
   font-size: 1rem;
   transition: color .2s;
+
 }
 
 .nav-links a:hover {
@@ -184,7 +184,6 @@ body.dark .modal-content, body.dark .ops-modal {
 .modal-features {
   list-style: disc;
   margin-left: 1.2rem;
-}
 .modal-actions {
   display: flex;
   justify-content: flex-end;
