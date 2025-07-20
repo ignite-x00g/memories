@@ -1,11 +1,22 @@
 // main.js
 
 import { openModal } from './connector.js';
+import { openChatbot } from './bot.js';
 import { services } from './app-data.js';
+
+window.openModal = openModal;
+window.openChatbot = openChatbot;
 
 document.addEventListener('DOMContentLoaded', function() {
   const navLinksContainer = document.querySelector('.nav-links');
   const gridContainer = document.querySelector('.grid-container');
+
+  const homeLink = document.createElement('a');
+  homeLink.href = 'index.html';
+  homeLink.className = 'nav-link';
+  homeLink.dataset.es = 'Inicio';
+  homeLink.textContent = 'Home';
+  navLinksContainer.appendChild(homeLink);
 
   services.forEach(service => {
     // Create nav link

@@ -7,7 +7,7 @@
   <meta name="description" content="OPS Online Support structure prototype and navigation">
   <meta name="robots" content="index, follow">
     <!-- Font Awesome -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' unsafe-inline; style-src 'self' unsafe-inline;">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com; form-action 'self'; object-src 'none'; base-uri 'self';">
   <link rel="stylesheet" href="../css/global.css">
   <link rel="stylesheet" href="../css/fabs.css">
   <link rel="stylesheet" href="../css/bot.css">
@@ -41,5 +41,9 @@
   <script type="module" src="../js/main.js"></script>
   <script type="module" src="../js/fabmain.js"></script>
   <script type="module" src="../js/bot.js"></script>
+  <script type="module">
+    import { sanitizeForms } from '../js/security.js';
+    sanitizeForms();
+  </script>
 </body>
 </html>
