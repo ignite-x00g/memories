@@ -26,22 +26,24 @@ body.dark {
 
 /* NAV */
 .ops-nav {
-  width: 100%;
-  max-width: 1240px;
-  margin: 0 auto;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 1rem 2rem;
+  align-items: center;
+  padding: 20px 10px;
 }
+
 .ops-logo {
+  margin: 0;
   font-size: 2rem;
   font-weight: bold;
   color: var(--clr-accent);
   text-decoration: none;
 }
+
 .nav-links {
   display: flex;
+  justify-content: center;
+  flex-grow: 1;
   gap: 2rem;
 }
 .nav-links a {
@@ -49,8 +51,12 @@ body.dark {
   color: inherit;
   font-size: 1rem;
   transition: color .2s;
+
 }
-.nav-links a:hover { color: var(--clr-primary); }
+
+.nav-links a:hover {
+  color: var(--clr-primary);
+}
 
 .toggles {
   display: flex;
@@ -75,11 +81,18 @@ body.dark {
 /* CARDS */
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
   max-width: 75rem;
-  margin: 2rem auto;
+  margin: 200px auto 2rem;
   padding: 0 1rem;
+}
+
+@media (max-width: 900px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+    width: 80%;
+  }
 }
 .card {
   background: var(--clr-glass);
@@ -171,7 +184,6 @@ body.dark .modal-content, body.dark .ops-modal {
 .modal-features {
   list-style: disc;
   margin-left: 1.2rem;
-}
 .modal-actions {
   display: flex;
   justify-content: flex-end;
