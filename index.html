@@ -46,8 +46,11 @@
             <p class="content">Conéctese con nuestro equipo de profesionales certificados.</p>
         </div>
     </main>
-  
-    <footer>
+
+  <div id="modal-container">
+        <!-- Modals will be loaded here -->
+    </div>
+    <footer class="footer">
         <p>© 2025 OPS Online Support.</p>
     </footer>
 
@@ -56,7 +59,7 @@
     <div id="contactcenter-modal-placeholder"></div>
     <div id="itsupport-modal-placeholder"></div>
     <div id="professionals-modal-placeholder"></div>
-
+  
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             fetch('components/modals/business-modal.html')
