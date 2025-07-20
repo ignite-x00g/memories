@@ -294,9 +294,16 @@ body.dark .ops-modal {
   box-shadow: 0 2px 18px #ff3bdc33;
 }
 
+@media (max-width: 768px) {
+  .ops-nav .nav-links {
+    display: none;
+  }
+}
+
 @media (max-width: 700px) {
   .ops-modal {
-    max-width: 99vw;
+    width: 90vw;
+    max-width: none;
     padding: 1.2rem 1rem 1rem 1rem;
   }
   .ops-modal .modal-header {
