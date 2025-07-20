@@ -257,7 +257,6 @@
     </style>
 </head>
 <body>
-
     <header class="header">
         <div class="logo">OPS</div>
         <nav class="nav">
@@ -306,13 +305,11 @@
             </div>
         </section>
     </main>
-
     <div class="fab-stack">
         <div class="fab"><span>+</span></div>
         <div class="fab"><span>&#9993;</span></div>
         <div class="fab"><span>&#128172;</span></div>
     </div>
-
     <div id="modal-container" class="modal-container">
         <div class="modal-content">
             <span class="close-btn">X</span>
@@ -338,7 +335,6 @@
     <footer class="footer">
         <p>© 2025 OPS Online Support.</p>
     </footer>
-
     <section id="contact-form" class="main-content">
         <h2>Contact Us</h2>
         <p>This is a placeholder for the contact form.</p>
@@ -380,14 +376,12 @@
             }
         `;
         document.head.appendChild(style);
-
         const modalContainer = document.getElementById('modal-container');
         const modalTitle = document.getElementById('modal-title');
         const modalDescriptionTop = document.getElementById('modal-description-top');
         const modalList = document.getElementById('modal-list');
         const closeBtn = document.querySelector('.close-btn');
         const cards = document.querySelectorAll('.card');
-
         let currentLanguage = 'en';
 
         const modalData = {
@@ -460,9 +454,7 @@
                 }
             }
         };
-
         const langToggle = document.getElementById('lang-toggle');
-
         langToggle.addEventListener('click', () => {
             if (currentLanguage === 'en') {
                 currentLanguage = 'es';
@@ -472,7 +464,6 @@
                 langToggle.textContent = 'ES';
             }
         });
-
         cards.forEach(card => {
             card.addEventListener('click', () => {
                 const title = card.querySelector('.card-title').textContent;
@@ -488,11 +479,9 @@
                 modalContainer.style.display = 'block';
             });
         });
-
         closeBtn.addEventListener('click', () => {
             modalContainer.style.display = 'none';
         });
-
         window.addEventListener('click', (event) => {
             if (event.target == modalContainer) {
                 modalContainer.style.display = 'none';
