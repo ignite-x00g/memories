@@ -23,28 +23,29 @@
     </header>
 
     <main class="grid-container">
-        <div class="card">
+        <div class="card" data-modal="ops">
             <h2 class="title">Business Operations</h2>
             <span class="icon">&#128188;</span>
             <p class="content">Optimice sus procesos para obtener la máxima eficiencia.</p>
         </div>
-        <div class="card">
+        <div class="card" data-modal="cc">
             <h2 class="title">Contact Center</h2>
             <span class="icon">&#128222;</span>
             <p class="content">Mejore la satisfacción del cliente con nuestro soporte experto.</p>
         </div>
-        <div class="card">
+        <div class="card" data-modal="it">
             <h2 class="title">IT Support</h2>
             <span class="icon">&#128187;</span>
             <p class="content">Asistencia técnica confiable para mantener sus sistemas en funcionamiento.</p>
         </div>
-        <div class="card">
+        <div class="card" data-modal="pro">
             <h2 class="title">Professionals</h2>
             <span class="icon">&#128100;</span>
             <p class="content">Conéctese con nuestro equipo de profesionales certificados.</p>
         </div>
     </main>
     <div id="fab-container"></div>
+    <div id="modal-root"></div>
     <div id="modal-container" class="modal-backdrop" style="display: none;">
         <div class="ops-modal">
             <button class="modal-close">X</button>
