@@ -16,9 +16,11 @@
     <span class="ops-logo">OPS</span>
     <div class="nav-links">
       <a href="../index.html" class="nav-link">Home</a>
+      <a href="business.html" class="nav-link">Business Operations</a>
       <a href="contactcenter.html" class="nav-link">Contact Center</a>
       <a href="itsupport.html" class="nav-link">IT Support</a>
       <a href="professionals.html" class="nav-link">Professionals</a>
+      <a href="contact.html" class="nav-link">Contact Us</a>
     </div>
     <div class="toggles">
       <button role="button" class="toggle-btn" id="lang-toggle">EN</button>
@@ -56,7 +58,7 @@
  	 Content Here
     </p>
     <div class="modal-actions" style="margin-top:2.2em;">
-      <button role="button" class="modal-btn cta" onclick="openModal('contact', true)">Contact Us</button>
+      <a href="contact.html" class="modal-btn cta">Contact Us</a>
       <a href="join.html" class="modal-btn">Join Us</a>
     </div>
   </main>
@@ -67,46 +69,5 @@
   <script type="module" src="../js/central.js"></script>
   <script type="module" src="../js/fabmain.js"></script>
   <script type="module" src="../js/bot.js"></script>
-<div id="contact-modal-container"></div>
-<button id="contact-us-btn">Contact Us</button>
 </body>
-<script>
-    fetch('contact.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('contact-modal-container').innerHTML = data;
-            const contactUsBtn = document.getElementById('contact-us-btn');
-            const contactModal = document.getElementById('contact-modal');
-            const closeModal = document.querySelector('.close-modal');
-            const cancelBtn = document.querySelector('.cancel-button');
-
-            contactUsBtn.addEventListener('click', () => {
-                contactModal.style.display = 'flex';
-            });
-
-            closeModal.addEventListener('click', () => {
-                contactModal.style.display = 'none';
-                window.location.href = '../index.html';
-            });
-
-            cancelBtn.addEventListener('click', () => {
-                contactModal.style.display = 'none';
-                window.location.href = '../index.html';
-            });
-
-            window.addEventListener('click', (event) => {
-                if (event.target == contactModal) {
-                    contactModal.style.display = 'none';
-                    window.location.href = '../index.html';
-                }
-            });
-
-            window.addEventListener('keydown', (event) => {
-                if (event.key === 'Escape') {
-                    contactModal.style.display = 'none';
-                    window.location.href = '../index.html';
-                }
-            });
-        });
-</script>
 </html>
