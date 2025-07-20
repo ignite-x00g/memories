@@ -66,6 +66,22 @@ textarea{resize:vertical}
 .form-cell{flex:1 1 48%;display:flex;flex-direction:column}
 @media(max-width:600px){.form-cell{flex:1 1 100%}}
 
+#contactModal .modal-content {
+    width: 600px;
+    height: auto;
+}
+
+#contactModalHeader {
+    cursor: move;
+}
+
+@media(max-width:768px){
+    #contactModal .modal-content {
+        width: 80vw;
+        height: 90vh;
+    }
+}
+
 /*************  CHATBOT  *************/
 #chatbot-container{width:295px;height:540px;background:#2e1852;border-radius:18px;border:2px solid var(--clr-accent);box-shadow:0 8px 32px #0006;display:flex;flex-direction:column;overflow:hidden}
 #chatbot-header{background:var(--clr-accent);color:#fff;padding:1rem;font-weight:bold;font-size:1.25rem;text-align:center}
