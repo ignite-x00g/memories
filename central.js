@@ -8,13 +8,13 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('#lang-toggle,#mobile-lang-toggle,#langCtrl').forEach(btn => {
       if (btn) btn.textContent = toES ? 'EN' : 'ES';
     });
-    document.querySelectorAll('[data-en]').forEach(el => {
-      if (el.dataset.en && el.dataset.es) {
+    document.querySelectorAll('[data-es]').forEach(el => {
+        if (!el.dataset.en) el.dataset.en = el.textContent;
         el.textContent = toES ? el.dataset.es : el.dataset.en;
-      }
     });
-    document.querySelectorAll('[data-en-ph]').forEach(el => {
-      el.placeholder = toES ? el.dataset.esPh : el.dataset.enPh;
+    document.querySelectorAll('[data-es-ph]').forEach(el => {
+        if (!el.dataset.enPh) el.dataset.enPh = el.placeholder;
+        el.placeholder = toES ? el.dataset.esPh : el.dataset.enPh;
     });
   }
 

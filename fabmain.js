@@ -6,21 +6,19 @@ import { openChatbot } from './bot.js';
 fetch('fabs.html').then(r => r.text()).then(html => {
   document.getElementById('fab-root').innerHTML = html;
 
-  // DESKTOP FAB triggers
-  const fabJoin = document.getElementById('fab-join');
-  if (fabJoin) fabJoin.onclick = () => openModal('join-modal', true);
-  const fabContact = document.getElementById('fab-contact');
-  if (fabContact) fabContact.onclick = () => openModal('contact', true);
-  const fabChat = document.getElementById('fab-chat');
-  if (fabChat) fabChat.onclick = () => openChatbot();
+  document.querySelectorAll('[data-modal]').forEach(btn => {
+    if (btn.dataset.modal === 'join-modal') {
+      btn.onclick = () => window.location.href = 'join.html';
+    } else {
+      btn.onclick = () => openModal(btn.dataset.modal, true);
+    }
+  });
 
-  // MOBILE FAB triggers
-  const mobileFabJoin = document.getElementById('mobile-fab-join');
-  if (mobileFabJoin) mobileFabJoin.onclick = () => openModal('join-modal', true);
-  const mobileFabContact = document.getElementById('mobile-fab-contact');
-  if (mobileFabContact) mobileFabContact.onclick = () => openModal('contact', true);
-  const mobileFabChat = document.getElementById('mobile-fab-chat');
-  if (mobileFabChat) mobileFabChat.onclick = () => openChatbot();
+  document.querySelectorAll('[data-action]').forEach(btn => {
+    if (btn.dataset.action === 'chatbot') {
+      btn.onclick = () => openChatbot();
+    }
+  });
 
   // Accordion nav open/close logic
   const accordionBtn = document.getElementById('mobile-fab-services');
@@ -39,10 +37,8 @@ fetch('fabs.html').then(r => r.text()).then(html => {
   }
 
   // Lang/Theme toggles via events
-  const mobileLangToggle = document.getElementById('mobile-lang-toggle');
-  if (mobileLangToggle) mobileLangToggle.onclick = () =>
+  document.getElementById('mobile-lang-toggle').onclick = () =>
     window.dispatchEvent(new Event('toggle-lang'));
-  const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
-  if (mobileThemeToggle) mobileThemeToggle.onclick = () =>
+  document.getElementById('mobile-theme-toggle').onclick = () =>
     window.dispatchEvent(new Event('toggle-theme'));
 });

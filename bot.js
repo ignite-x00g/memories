@@ -96,38 +96,38 @@ export function openChatbot() {
 }
 
 function centerModal(modal) {
-    const isMobile = window.innerWidth <= 768;
-    if (isMobile) {
-        modal.style.width = '80%';
-        modal.style.height = '80%';
-    }
-    modal.style.left = `${(window.innerWidth - modal.offsetWidth) / 2}px`;
-    modal.style.top = `${(window.innerHeight - modal.offsetHeight) / 2}px`;
+    modal.style.left = '50%';
+    modal.style.top = '50%';
+    modal.style.transform = 'translate(-50%, -50%)';
 }
 
 export function makeModalDraggable(modal, header) {
     if (!header) return;
-    let offsetX = 0, offsetY = 0, startX = 0, startY = 0, dragging = false;
+    let startX = 0, startY = 0, dragging = false;
 
     header.addEventListener('mousedown', dragStart, false);
-    header.addEventListener('touchstart', dragStart, false);
+    header.addEventListener('touchstart', dragStart, { passive: false });
 
     function dragStart(e) {
         dragging = true;
         modal.classList.add('dragging');
-        startX = (e.touches ? e.touches[0].clientX : e.clientX) - modal.offsetLeft;
-        startY = (e.touches ? e.touches[0].clientY : e.clientY) - modal.offsetTop;
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        startX = clientX - modal.offsetLeft;
+        startY = clientY - modal.offsetTop;
         document.addEventListener('mousemove', dragMove, false);
         document.addEventListener('mouseup', dragEnd, false);
-        document.addEventListener('touchmove', dragMove, false);
+        document.addEventListener('touchmove', dragMove, { passive: false });
         document.addEventListener('touchend', dragEnd, false);
         e.preventDefault();
     }
 
     function dragMove(e) {
         if (!dragging) return;
-        let x = (e.touches ? e.touches[0].clientX : e.clientX) - startX;
-        let y = (e.touches ? e.touches[0].clientY : e.clientY) - startY;
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        let x = clientX - startX;
+        let y = clientY - startY;
         // Limit to viewport
         x = Math.max(10, Math.min(x, window.innerWidth - modal.offsetWidth - 10));
         y = Math.max(10, Math.min(y, window.innerHeight - modal.offsetHeight - 10));
@@ -135,14 +135,15 @@ export function makeModalDraggable(modal, header) {
         modal.style.top = y + 'px';
         modal.style.right = 'auto'; // Prevent centering override
         modal.style.margin = 0;
+        if(e.touches) e.preventDefault();
     }
 
-    function dragEnd(e) {
+    function dragEnd() {
         dragging = false;
         modal.classList.remove('dragging');
         document.removeEventListener('mousemove', dragMove, false);
         document.removeEventListener('mouseup', dragEnd, false);
-        document.removeEventListener('touchmove', dragMove, false);
+        document.removeEventListener('touchmove', dragMove, { passive: false });
         document.removeEventListener('touchend', dragEnd, false);
     }
 }
