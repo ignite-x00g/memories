@@ -21,7 +21,7 @@ export const services = {
       modal: {
         title: "Gestion",
         img: "https://placehold.co/96x96?text=OPS",
-        imgAlt: "Operaciones Empresariales",
+        imgAlt: "Gestion",
         content: "Optimizamos flujos de trabajo, logística e implementamos marcos de riesgo y cumplimiento.",
         features: [
           "Automatización de flujos",
