@@ -236,9 +236,7 @@
         width: 100%;
         height: 100%;
         z-index: 1000;
-
     }
-
     .dark-mode .ops-modal {
         color: black;
     }
@@ -308,16 +306,13 @@
                 modal.style.display = 'none';
             });
         });
-
-
+        
         // Make modals draggable
         const modals = document.querySelectorAll('.ops-modal');
-
         modals.forEach(modal => {
           const header = modal.querySelector('.modal-header');
           let isDragging = false;
           let offsetX, offsetY;
-
           header.addEventListener('mousedown', (e) => {
             isDragging = true;
             offsetX = e.clientX - modal.offsetLeft;
