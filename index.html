@@ -257,7 +257,6 @@
     </style>
 </head>
 <body>
-
     <header class="header">
         <div class="logo">OPS</div>
         <nav class="nav">
@@ -280,6 +279,7 @@
                 <p class="card-description">Optimice sus procesos para obtener la máxima eficiencia.</p>
                 <div class="card-underline"></div>
             </div>
+
             <div id="contact-center" class="card">
                 <div class="card-icon"></div>
                 <h2 class="card-title">Contact Center</h2>
@@ -374,14 +374,12 @@
             }
         `;
         document.head.appendChild(style);
-
         const modalContainer = document.getElementById('modal-container');
         const modalTitle = document.getElementById('modal-title');
         const modalDescriptionTop = document.getElementById('modal-description-top');
         const modalList = document.getElementById('modal-list');
         const closeBtn = document.querySelector('.close-btn');
         const cards = document.querySelectorAll('.card');
-
         let currentLanguage = 'en';
 
         const modalData = {
@@ -456,7 +454,6 @@
         };
 
         const langToggle = document.getElementById('lang-toggle');
-
         langToggle.addEventListener('click', () => {
             if (currentLanguage === 'en') {
                 currentLanguage = 'es';
@@ -467,7 +464,7 @@
             }
         });
 
-        cards.forEach(card => {
+      cards.forEach(card => {
             card.addEventListener('click', () => {
                 const title = card.querySelector('.card-title').textContent;
                 const data = modalData[currentLanguage][title];
@@ -482,11 +479,10 @@
                 modalContainer.style.display = 'block';
             });
         });
-
+      
         closeBtn.addEventListener('click', () => {
             modalContainer.style.display = 'none';
         });
-
         window.addEventListener('click', (event) => {
             if (event.target == modalContainer) {
                 modalContainer.style.display = 'none';
