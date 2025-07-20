@@ -1,0 +1,7 @@
+.modal-overlay {
+  background-color: transparent;
+}
+
+.dark-mode .ops-modal {
+    color: black;
+}
