@@ -1,51 +1,61 @@
-import { services } from '../app-data.js';
-import { openServiceModal, openJoinModal, openContactModal } from './connector.js';
-import { openChatbot } from './bot.js';
+document.addEventListener('DOMContentLoaded', () => {
+    const modalContainer = document.getElementById('modal-container');
+    const cards = document.querySelectorAll('.card');
 
-let lang = 'en', theme = 'light';
+    const modals = {
+        'business-modal': 'components/modals/business-modal.html',
+        'contactcenter-modal': 'components/modals/contactcenter-modal.html',
+        'itsupport-modal': 'components/modals/itsupport-modal.html',
+        'professionals-modal': 'components/modals/professionals-modal.html'
+    };
 
-// Card click → service modal
-document.querySelectorAll('.card').forEach(card => {
-    card.onclick = () => {
-        const modalKey = card.getAttribute('data-modal');
-        if (modalKey) {
-            openServiceModal(modalKey);
+    const loadModal = async (modalId, url) => {
+        try {
+            const response = await fetch(url);
+            const html = await response.text();
+            const modalElement = document.createElement('div');
+            modalElement.innerHTML = html;
+            const modal = modalElement.firstElementChild;
+            modal.id = modalId;
+            modalContainer.appendChild(modal);
+            return modal;
+        } catch (error) {
+            console.error(`Failed to load modal: ${modalId}`, error);
+            return null;
         }
     };
+
+    const openModal = (modal) => {
+        if (modal) {
+            modal.classList.add('active');
+        }
+    };
+
+    const closeModal = (modal) => {
+        if (modal) {
+            modal.classList.remove('active');
+        }
+    };
+
+    cards.forEach(card => {
+        const modalId = card.getAttribute('data-modal-target');
+        if (modalId && modals[modalId]) {
+            loadModal(modalId, modals[modalId]).then(modal => {
+                if (modal) {
+                    card.addEventListener('click', () => openModal(modal));
+                    const closeButton = modal.querySelector('.close-button');
+                    if (closeButton) {
+                        closeButton.addEventListener('click', () => closeModal(modal));
+                    }
+                }
+            });
+        }
+    });
+
+    modalContainer.addEventListener('click', (e) => {
+        if (e.target === modalContainer) {
+            const activeModal = modalContainer.querySelector('.modal.active');
+            closeModal(activeModal);
+        }
+    });
 });
-
-// FAB handlers
-// document.getElementById('fab-join').onclick = openJoinModal;
-// document.getElementById('fab-contact').onclick = openContactModal;
-document.getElementById('fab-chat').onclick = openChatbot;
-// document.getElementById('mobile-fab-join').onclick = openJoinModal;
-// document.getElementById('mobile-fab-contact').onclick = openContactModal;
-document.getElementById('mobile-fab-chat').onclick = openChatbot;
-
-// Services accordion (mobile)
-document.getElementById('mobile-fab-services').onclick = () => {
-    document.getElementById('mobile-panel-services').classList.toggle('active');
-};
-
-// Lang & Theme
-function setLang(l) {
-    lang = l;
-    window.dispatchEvent(new CustomEvent('lang-changed', { detail: { lang: l } }));
-}
-function setTheme(t) {
-    theme = t;
-    document.body.classList.toggle('dark', t === 'dark');
-}
-
-document.getElementById('lang-toggle').onclick = () => {
-    setLang(lang === 'en' ? 'es' : 'en');
-    document.getElementById('lang-toggle').textContent = lang === 'en' ? 'EN' : 'ES';
-    document.getElementById('mobile-lang-toggle').textContent = lang === 'en' ? 'EN' : 'ES';
-};
-document.getElementById('theme-toggle').onclick = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
-    document.getElementById('theme-toggle').textContent = theme === 'light' ? 'Dark' : 'Light';
-    document.getElementById('mobile-theme-toggle').textContent = theme === 'light' ? 'Dark' : 'Light';
-};
-document.getElementById('mobile-lang-toggle').onclick = () => document.getElementById('lang-toggle').click();
-document.getElementById('mobile-theme-toggle').onclick = () => document.getElementById('theme-toggle').click();
