@@ -209,7 +209,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h2>Join Us</h2>
-        <button class="close-modal" aria-label="Close" onclick="document.getElementById('join-modal').style.display='none'">&times;</button>
+        <button class="close-modal" aria-label="Close">&times;</button>
       </div>
       <form id="join-form" autocomplete="off">
         <div class="form-row">
@@ -299,8 +299,31 @@
     </div>
   </div>
 
-  <script>
-    // OPS color palette for random accents
+  <script type="module">
+      import { sanitizeForms } from '../js/security.js';
+
+      const modal = document.getElementById('join-modal');
+      const closeBtn = document.querySelector('.close-modal');
+
+      // Activate modal on load
+      modal.style.display = 'flex';
+
+      const closeAndRedirect = () => {
+        modal.style.display = 'none';
+        window.location.href = '../index.html';
+      };
+
+      closeBtn.addEventListener('click', closeAndRedirect);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeAndRedirect();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeAndRedirect();
+      });
+
+      sanitizeForms();
+
+      // OPS color palette for random accents
     const opsAccentSets = [
       { main: '#ff3bdc', alt: '#00c4ff' },
       { main: '#7353ea', alt: '#ff3bdc' },
@@ -412,6 +435,7 @@
         section.querySelector('.add').disabled = false;
         section.querySelector('.remove').disabled = true;
       });
+      window.location.href = '../index.html';
     });
   </script>
 </body>
