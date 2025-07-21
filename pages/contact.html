@@ -135,26 +135,37 @@
       </form>
     </div>
     <div class="modal-footer">
-      <button type="button" class="cancel-button" data-en="Cancel" data-es="Cancelar">Cancel</button>
-      <button type="submit" form="contact-form" class="submit-button" data-en="Send" data-es="Enviar">Send</button>
+      <button type="button" class="cancel-button close-modal" data-en="Cancel" data-es="Cancelar">Cancel</button>
+      <button type="submit" form="contact-form" class="submit-button"
+              data-en="Send" data-es="Enviar">Send</button>
     </div>
   </div>
 </div>
-<script type="module">
-  import { sanitizeForms } from '../js/security.js';
-  document.addEventListener('DOMContentLoaded', () => {
-    sanitizeForms();
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
     const modal = document.getElementById('contact-modal');
-    const closeBtn = modal.querySelector('.close-modal');
-    const cancelBtn = modal.querySelector('.cancel-button');
     const form = document.getElementById('contact-form');
-    const redirect = () => { window.location.href = '../index.html'; };
-    closeBtn.addEventListener('click', redirect);
-    cancelBtn.addEventListener('click', redirect);
-    modal.addEventListener('click', e => { if (e.target === modal) redirect(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') redirect(); });
-    form.addEventListener('submit', e => { e.preventDefault(); redirect(); });
+    const closeBtns = modal.querySelectorAll('.close-modal');
+    const redirectHome = () => { window.location.href = '../index.html'; };
+    const closeModal = () => {
+      modal.style.display = 'none';
+      redirectHome();
+    };
+
+    closeBtns.forEach(btn => btn.addEventListener('click', closeModal));
+
+    modal.addEventListener('click', e => {
+      if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      form.reset();
+      closeModal();
+    });
   });
 </script>
-</body>
-</html>
