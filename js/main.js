@@ -1,5 +1,13 @@
 import { sanitize } from './security.js';
 
+let draggableModulePromise;
+const loadDraggable = async () => {
+    if (!draggableModulePromise) {
+        draggableModulePromise = import('../components/modals/draggable.js');
+    }
+    return draggableModulePromise;
+};
+
 export function openModal(id) {
     const modal = document.getElementById(id);
     if (modal) {
@@ -36,7 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const modal = modalElement.firstElementChild;
             modal.id = modalId;
             modalContainer.appendChild(modal);
-            await import('../components/modals/draggable.js');
+            const { initDraggable } = await loadDraggable();
+            initDraggable(modal);
             return modal;
         } catch (error) {
             console.error(`Failed to load modal: ${modalId}`, error);
