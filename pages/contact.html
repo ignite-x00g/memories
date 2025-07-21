@@ -91,10 +91,38 @@
 
     <!-- Modal Footer -->
     <div class="modal-footer">
-      <button type="button" class="cancel-button" data-en="Cancel" data-es="Cancelar">Cancel</button>
+      <button type="button" class="cancel-button close-modal" data-en="Cancel" data-es="Cancelar">Cancel</button>
       <button type="submit" form="contact-form" class="submit-button"
               data-en="Send" data-es="Enviar">Send</button>
     </div>
 
   </div>
 </div>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const modal = document.getElementById('contact-modal');
+    const form = document.getElementById('contact-form');
+    const closeBtns = modal.querySelectorAll('.close-modal');
+    const redirectHome = () => { window.location.href = '../index.html'; };
+    const closeModal = () => {
+      modal.style.display = 'none';
+      redirectHome();
+    };
+
+    closeBtns.forEach(btn => btn.addEventListener('click', closeModal));
+
+    modal.addEventListener('click', e => {
+      if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      form.reset();
+      closeModal();
+    });
+  });
+</script>

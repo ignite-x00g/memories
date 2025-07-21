@@ -209,7 +209,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h2>Join Us</h2>
-        <button class="close-modal" aria-label="Close" onclick="document.getElementById('join-modal').style.display='none'">&times;</button>
+        <button class="close-modal" aria-label="Close">&times;</button>
       </div>
       <form id="join-form" autocomplete="off">
         <div class="form-row">
@@ -386,6 +386,24 @@
       });
     });
 
+    const modal = document.getElementById('join-modal');
+    const closeBtns = modal.querySelectorAll('.close-modal');
+    const redirectHome = () => { window.location.href = '../index.html'; };
+    const closeModal = () => {
+      modal.style.display = 'none';
+      redirectHome();
+    };
+
+    closeBtns.forEach(btn => btn.addEventListener('click', closeModal));
+
+    modal.addEventListener('click', e => {
+      if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeModal();
+    });
+
     // Form validation and simple alert on submit
     document.getElementById('join-form').addEventListener('submit', function(e) {
       e.preventDefault();
@@ -412,6 +430,7 @@
         section.querySelector('.add').disabled = false;
         section.querySelector('.remove').disabled = true;
       });
+      closeModal();
     });
   </script>
 </body>
