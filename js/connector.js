@@ -83,7 +83,11 @@ function showFormModal(type) {
           </form>
         </div>`;
     document.getElementById('modal-root').appendChild(m);
-    const closeForm = () => m.remove();
+    const fromService = window.location.pathname.includes('/pages/');
+    const closeForm = () => {
+        m.remove();
+        if (fromService) window.location.href = '../index.html';
+    };
     m.querySelector('.modal-close').onclick = closeForm;
     m.onclick = e => { if (e.target === m) closeForm(); };
 }
