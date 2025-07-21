@@ -1,3 +1,21 @@
+import { sanitize } from './security.js';
+
+export function openModal(id) {
+    const modal = document.getElementById(id);
+    if (modal) {
+        modal.classList.add('active');
+    }
+}
+
+export function closeModal(id) {
+    const modal = id ? document.getElementById(id) : document.querySelector('.modal-overlay.active');
+    if (modal) {
+        modal.classList.remove('active');
+    }
+}
+
+window.openModal = openModal;
+
 document.addEventListener('DOMContentLoaded', () => {
     const modalContainer = document.getElementById('modal-container');
     const cards = document.querySelectorAll('.card');
@@ -12,28 +30,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const loadModal = async (modalId, url) => {
         try {
             const response = await fetch(url);
-            const html = await response.text();
+            const html = sanitize(await response.text());
             const modalElement = document.createElement('div');
             modalElement.innerHTML = html;
             const modal = modalElement.firstElementChild;
             modal.id = modalId;
             modalContainer.appendChild(modal);
+            await import('../components/modals/draggable.js');
             return modal;
         } catch (error) {
             console.error(`Failed to load modal: ${modalId}`, error);
             return null;
-        }
-    };
-
-    const openModal = (modal) => {
-        if (modal) {
-            modal.classList.add('active');
-        }
-    };
-
-    const closeModal = (modal) => {
-        if (modal) {
-            modal.classList.remove('active');
         }
     };
 
@@ -42,10 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (modalId && modals[modalId]) {
             loadModal(modalId, modals[modalId]).then(modal => {
                 if (modal) {
-                    card.addEventListener('click', () => openModal(modal));
+                    card.addEventListener('click', () => openModal(modalId));
                     const closeButton = modal.querySelector('.close-button');
                     if (closeButton) {
-                        closeButton.addEventListener('click', () => closeModal(modal));
+                        closeButton.addEventListener('click', () => closeModal(modalId));
                     }
                 }
             });
@@ -54,8 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     modalContainer.addEventListener('click', (e) => {
         if (e.target === modalContainer) {
-            const activeModal = modalContainer.querySelector('.modal.active');
-            closeModal(activeModal);
+            const active = modalContainer.querySelector('.modal-overlay.active');
+            if (active) closeModal(active.id);
         }
     });
 });

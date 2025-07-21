@@ -57,6 +57,8 @@ export function openChatbot() {
     }
 }
 
+window.openChatbot = openChatbot;
+
 window.addEventListener('lang-changed', (e) => {
     lang = e.detail.lang;
 });
