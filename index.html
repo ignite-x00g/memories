@@ -25,22 +25,22 @@
     </header>
 
     <main class="grid-container">
-        <div class="card" data-modal="business-modal">
+        <div class="card" data-modal-target="business-modal">
             <h2 class="title">Business Operations</h2>
             <span class="icon">&#128188;</span>
             <p class="content">Optimice sus procesos para obtener la máxima eficiencia.</p>
         </div>
-        <div class="card" data-modal="contactcenter-modal">
+        <div class="card" data-modal-target="contactcenter-modal">
             <h2 class="title">Contact Center</h2>
             <span class="icon">&#128222;</span>
             <p class="content">Mejore la satisfacción del cliente con nuestro soporte experto.</p>
         </div>
-        <div class="card" data-modal="itsupport-modal">
+        <div class="card" data-modal-target="itsupport-modal">
             <h2 class="title">IT Support</h2>
             <span class="icon">&#128187;</span>
             <p class="content">Asistencia técnica confiable para mantener sus sistemas en funcionamiento.</p>
         </div>
-        <div class="card" data-modal="professionals-modal">
+        <div class="card" data-modal-target="professionals-modal">
             <h2 class="title">Professionals</h2>
             <span class="icon">&#128100;</span>
             <p class="content">Conéctese con nuestro equipo de profesionales certificados.</p>
@@ -54,36 +54,8 @@
         <p>© 2025 OPS Online Support.</p>
     </footer>
 
-    <!-- Include Modals -->
-    <div id="business-modal-placeholder"></div>
-    <div id="contactcenter-modal-placeholder"></div>
-    <div id="itsupport-modal-placeholder"></div>
-    <div id="professionals-modal-placeholder"></div>
-  
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            fetch('components/modals/business-modal.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('business-modal-placeholder').innerHTML = data;
-                });
-            fetch('components/modals/contactcenter-modal.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('contactcenter-modal-placeholder').innerHTML = data;
-                });
-            fetch('components/modals/itsupport-modal.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('itsupport-modal-placeholder').innerHTML = data;
-                });
-            fetch('components/modals/professionals-modal.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('professionals-modal-placeholder').innerHTML = data;
-                });
-        });
-    </script>
-    <script src="js/fabmain.js"></script>
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/fabmain.js"></script>
+    <script type="module" src="js/bot.js"></script>
 </body>
 </html>

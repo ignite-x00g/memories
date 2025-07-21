@@ -141,7 +141,8 @@
     </div>
   </div>
 </div>
-<script>
+<script type="module">
+  import { sanitizeForms } from '../js/security.js';
   document.addEventListener('DOMContentLoaded', function () {
     const modal = document.getElementById('contact-modal');
     const form = document.getElementById('contact-form');
@@ -162,6 +163,7 @@
       if (e.key === 'Escape') closeModal();
     });
 
+    sanitizeForms();
     form.addEventListener('submit', e => {
       e.preventDefault();
       form.reset();

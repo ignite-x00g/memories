@@ -1,6 +1,13 @@
 const SANITIZE_CONFIG = {
-  ALLOWED_TAGS: ['b', 'i', 'em', 'strong', 'a'],
-  ALLOWED_ATTR: ['href', 'target'],
+  ALLOWED_TAGS: [
+    'b', 'i', 'em', 'strong', 'a', 'div', 'span', 'p', 'h1', 'h2', 'h3', 'h4',
+    'h5', 'h6', 'button', 'ul', 'ol', 'li', 'img', 'video', 'source', 'form',
+    'label', 'input', 'textarea', 'select', 'option'
+  ],
+  ALLOWED_ATTR: [
+    'href', 'target', 'src', 'alt', 'type', 'value', 'class', 'id', 'role',
+    'aria-label', 'aria-labelledby', 'aria-modal', 'style'
+  ],
 };
 
 /**
