@@ -1,67 +1,120 @@
-<div id="contact-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle" style="display: none;">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us</title>
+  <style>
+    :root {
+      --ops-pink: #ff3bdc;
+      --ops-purple: #7353ea;
+      --modal-overlay: rgba(55,33,89,0.18);
+      --glass: rgba(255,255,255,0.95);
+    }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #e7d6fc 0%, #e6f4fa 100%);
+      min-height: 100vh;
+      margin: 0;
+    }
+    .modal-overlay {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: var(--modal-overlay);
+      z-index: 1000;
+    }
+    .modal-content {
+      background: var(--glass);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      max-width: 600px;
+      width: 95vw;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+      position: relative;
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .modal-header h3 { margin: 0; color: var(--ops-pink); }
+    .close-modal {
+      background: none;
+      border: none;
+      font-size: 2rem;
+      color: var(--ops-purple);
+      cursor: pointer;
+    }
+    .form-row { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.2rem; }
+    .form-cell { flex: 1 1 45%; display: flex; flex-direction: column; }
+    label { font-weight: 600; margin-bottom: .3rem; color: #352c55; }
+    input, textarea, select {
+      border: 1.5px solid #d1c5f5;
+      border-radius: 8px;
+      padding: .7rem .9rem;
+      font-size: 1rem;
+      background: #f8f6ff;
+      color: #35314d;
+    }
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--ops-purple);
+      box-shadow: 0 0 0 2px #e9e0fa;
+    }
+    textarea { resize: vertical; min-height: 3.7em; }
+    .modal-footer { text-align: right; margin-top: 1.2rem; }
+    .cancel-button, .submit-button {
+      border: none;
+      border-radius: 8px;
+      padding: .6rem 1.6rem;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .cancel-button { background: #eee; color: #333; margin-right: .5rem; }
+    .submit-button { background: var(--ops-purple); color: #fff; }
+    .submit-button:hover { background: var(--ops-pink); }
+  </style>
+</head>
+<body>
+<div id="contact-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">
   <div class="modal-content">
-
-    <!-- Modal Header -->
     <div class="modal-header">
       <h3 id="contactModalTitle" data-en="Contact Us" data-es="Contáctenos">Contact Us</h3>
-      <button class="close-modal" data-close aria-label="Close">&times;</button>
+      <button class="close-modal" aria-label="Close">&times;</button>
     </div>
-
-    <!-- Modal Body -->
     <div class="modal-body">
       <form id="contact-form">
-
-        <!-- Name & Email -->
         <div class="form-row">
           <div class="form-cell">
             <label for="contact-name" data-en="Name" data-es="Nombre">Name</label>
-            <input type="text" id="contact-name"
-                   placeholder="Enter your name"
-                   data-en="Enter your name"
-                   data-es="Ingrese su Nombre"
-                   required>
+            <input type="text" id="contact-name" placeholder="Enter your name" data-en="Enter your name" data-es="Ingrese su Nombre" required>
           </div>
-
           <div class="form-cell">
             <label for="contact-email" data-en="Email" data-es="Correo Electrónico">Email</label>
-            <input type="email" id="contact-email"
-                   placeholder="Enter your email"
-                   data-en="Enter your email"
-                   data-es="Ingrese su correo electrónico"
-                   required>
+            <input type="email" id="contact-email" placeholder="Enter your email" data-en="Enter your email" data-es="Ingrese su correo electrónico" required>
           </div>
         </div>
-
-        <!-- Contact Number & Date -->
         <div class="form-row">
           <div class="form-cell">
             <label for="contact-number" data-en="Contact Number" data-es="Número de Contacto">Contact Number</label>
-            <input type="tel" id="contact-number"
-                   placeholder="Enter your contact number"
-                   data-en="Enter your contact number"
-                   data-es="Ingrese su número"
-                   required>
+            <input type="tel" id="contact-number" placeholder="Enter your contact number" data-en="Enter your contact number" data-es="Ingrese su número" required>
           </div>
-
           <div class="form-cell">
             <label for="contact-date" data-en="Preferred Date" data-es="Fecha Preferida">Preferred Date</label>
-            <input type="date" id="contact-date"
-                   data-en="Preferred Date"
-                   data-es="Fecha Preferida"
-                   required>
+            <input type="date" id="contact-date" data-en="Preferred Date" data-es="Fecha Preferida" required>
           </div>
         </div>
-
-        <!-- Time & Interest Dropdown -->
         <div class="form-row">
           <div class="form-cell">
             <label for="contact-time" data-en="Preferred Time" data-es="Hora Preferida">Preferred Time</label>
-            <input type="time" id="contact-time"
-                   data-en="Preferred Time"
-                   data-es="Hora Preferida"
-                   required>
+            <input type="time" id="contact-time" data-en="Preferred Time" data-es="Hora Preferida" required>
           </div>
-
           <div class="form-cell">
             <label for="contact-interest" data-en="What are you interested about?" data-es="¿En qué está interesado?">What are you interested about?</label>
             <select id="contact-interest" required>
@@ -73,29 +126,19 @@
             </select>
           </div>
         </div>
-
-        <!-- Comments -->
         <div class="form-row">
           <div class="form-cell" style="flex: 1 1 100%;">
             <label for="contact-comments" data-en="Comments" data-es="Comentarios">Comments</label>
-            <textarea id="contact-comments" rows="4"
-                      placeholder="What service are you interested in?"
-                      data-en="What service are you interested in?"
-                      data-es="En qué servicio está interesado?"
-                      required></textarea>
+            <textarea id="contact-comments" rows="4" placeholder="What service are you interested in?" data-en="What service are you interested in?" data-es="En qué servicio está interesado?" required></textarea>
           </div>
         </div>
-
       </form>
     </div>
-
-    <!-- Modal Footer -->
     <div class="modal-footer">
       <button type="button" class="cancel-button close-modal" data-en="Cancel" data-es="Cancelar">Cancel</button>
       <button type="submit" form="contact-form" class="submit-button"
               data-en="Send" data-es="Enviar">Send</button>
     </div>
-
   </div>
 </div>
 <script>
