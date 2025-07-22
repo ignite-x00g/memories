@@ -77,3 +77,10 @@ export function sanitizeForms(target = document) {
     });
   });
 }
+
+/**
+ * Automatically sanitize forms when the page is hidden.
+ */
+export function setupAutoSanitize(target = document) {
+  window.addEventListener('pagehide', () => sanitizeForms(target));
+}

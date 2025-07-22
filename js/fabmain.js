@@ -13,20 +13,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     qs('#mobile-services-menu')?.classList.toggle('active')
   );
   qs('#mobile-language-toggle')?.addEventListener('click', () => {
-    const btn = qs('#mobile-language-toggle');
-    if (!btn) return;
-    const isEN = btn.textContent === 'EN';
-    qsa('[data-en]').forEach(el => {
-      el.textContent = isEN ? el.dataset.es : el.dataset.en;
-    });
-    btn.textContent = isEN ? 'ES' : 'EN';
+    window.dispatchEvent(new Event('toggle-lang'));
   });
   qs('#mobile-theme-toggle')?.addEventListener('click', () => {
-    const btn = qs('#mobile-theme-toggle');
-    if (!btn) return;
-    const light = btn.textContent === 'Light';
-    document.body.classList.toggle('dark', light);
-    btn.textContent = light ? 'Dark' : 'Light';
+    window.dispatchEvent(new Event('toggle-theme'));
   });
 
   /* ---------- Join dynamic sections ---------- */

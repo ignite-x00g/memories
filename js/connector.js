@@ -29,12 +29,15 @@ function showFormModal(type) {
           <form>
             ${fields}
             <div class="modal-actions">
-              <button type="button" class="modal-btn" onclick="closeForm()">Cancel</button>
+              <button type="button" class="modal-btn modal-cancel">Cancel</button>
               <button type="submit" class="modal-btn">${lang === 'en' ? 'Submit' : 'Enviar'}</button>
             </div>
           </form>
         </div>`;
-    document.getElementById('modal-root').appendChild(m);
+    const root = document.getElementById('modal-container') ||
+                 document.getElementById('modal-root') ||
+                 document.body;
+    root.appendChild(m);
     sanitizeForms(m.querySelector('form'));
     const fromService = window.location.pathname.includes('/pages/');
     const closeForm = () => {
@@ -42,6 +45,7 @@ function showFormModal(type) {
         if (fromService) window.location.href = '../index.html';
     };
     m.querySelector('.modal-close').onclick = closeForm;
+    m.querySelector('.modal-cancel').onclick = closeForm;
     m.onclick = e => { if (e.target === m) closeForm(); };
 }
 

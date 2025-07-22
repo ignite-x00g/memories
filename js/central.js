@@ -1,11 +1,35 @@
 // central.js
+import { sanitizeForms, setupAutoSanitize } from './security.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.documentElement;
+  sanitizeForms();
+  setupAutoSanitize();
+
+  const langBtn = document.getElementById('lang-toggle');
+  const themeBtn = document.getElementById('theme-toggle');
+  const mobileLangBtn = document.getElementById('mobile-language-toggle');
+  const mobileThemeBtn = document.getElementById('mobile-theme-toggle');
+
+  langBtn && langBtn.addEventListener('click', () => {
+    window.dispatchEvent(new Event('toggle-lang'));
+  });
+
+  mobileLangBtn && mobileLangBtn.addEventListener('click', () => {
+    window.dispatchEvent(new Event('toggle-lang'));
+  });
+
+  themeBtn && themeBtn.addEventListener('click', () => {
+    window.dispatchEvent(new Event('toggle-theme'));
+  });
+
+  mobileThemeBtn && mobileThemeBtn.addEventListener('click', () => {
+    window.dispatchEvent(new Event('toggle-theme'));
+  });
 
   function applyLanguage(toES) {
     root.lang = toES ? 'es' : 'en';
-    document.querySelectorAll('#lang-toggle,#mobile-lang-toggle,#langCtrl').forEach(btn => {
+    document.querySelectorAll('#lang-toggle,#mobile-language-toggle,#langCtrl').forEach(btn => {
       if (btn) btn.textContent = toES ? 'EN' : 'ES';
     });
     document.querySelectorAll('[data-es]').forEach(el => {
