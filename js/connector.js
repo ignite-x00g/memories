@@ -6,10 +6,12 @@ let lang = 'en';
 export function openJoinModal() {
     showFormModal('join');
 }
+window.openJoinModal = openJoinModal;
 
 export function openContactModal() {
     showFormModal('contact');
 }
+window.openContactModal = openContactModal;
 
 function showFormModal(type) {
     const titles = { join: { en: 'Join Us', es: 'Únete' }, contact: { en: 'Contact Us', es: 'Contáctenos' } };
