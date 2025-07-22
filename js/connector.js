@@ -1,3 +1,6 @@
+import { makeModalDraggable } from './bot.js';
+import { services } from '../app-data.js';
+import { sanitizeForms } from './security.js';
 let lang = 'en';
 
 export function openJoinModal() {
@@ -30,6 +33,7 @@ function showFormModal(type) {
           </form>
         </div>`;
     document.getElementById('modal-root').appendChild(m);
+    sanitizeForms(m.querySelector('form'));
     const fromService = window.location.pathname.includes('/pages/');
     const closeForm = () => {
         m.remove();

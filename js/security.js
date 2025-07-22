@@ -53,10 +53,20 @@ export function sanitize(dirty) {
 /**
  * Sanitize all form inputs on the page.
  */
-export function sanitizeForms() {
-  const forms = document.querySelectorAll('form');
+export function sanitizeForms(target = document) {
+  let forms;
+  if (target instanceof HTMLFormElement) {
+    forms = [target];
+  } else if (target && typeof target.querySelectorAll === 'function') {
+    forms = target.querySelectorAll('form');
+  } else {
+    forms = document.querySelectorAll('form');
+  }
+
   forms.forEach(form => {
-    form.addEventListener('submit', (event) => {
+    if (form.dataset.sanitized) return;
+    form.dataset.sanitized = 'true';
+    form.addEventListener('submit', () => {
       const inputs = form.querySelectorAll('input, textarea, select');
       inputs.forEach(input => {
         if (input.type === 'file' || input.type === 'password') {
