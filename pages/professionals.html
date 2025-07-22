@@ -7,7 +7,6 @@
   <meta name="description" content="OPS professionals network and services">
   <meta name="robots" content="index, follow">
   <link rel="stylesheet" href="../css/global.css">
-  <link rel="stylesheet" href="../css/fabs.css">
   <link rel="stylesheet" href="../css/bot.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta1/css/all.min.css">
 </head>
@@ -60,7 +59,14 @@
       <a href="#" class="modal-btn" onclick="openJoinModal();return false;">Join Us</a>
     </div>
   </main>
-  <div id="fab-root"></div>
+  <div id="fab-container">
+    <button class="fab" id="contact-fab" data-modal="contactModal" title="Contact Us">
+      <i class="fas fa-envelope"></i>
+    </button>
+    <button class="fab" id="join-fab" data-modal="joinModal" title="Join Us">
+      <i class="fas fa-user-plus"></i>
+    </button>
+  </div>
   <div id="modal-root"></div>
   <footer>© 2025 OPS Online Support</footer>
   <script type="module" src="../js/main.js"></script>
