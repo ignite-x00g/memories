@@ -37,12 +37,12 @@ export function openChatbot() {
         addMsg('…', 'bot');
 
         try {
-            const r = await fetch('https://your-cloudflare-worker.example.com/chat', {
+            const r = await fetch('https://jsonplaceholder.typicode.com/posts', {
                 method: 'POST', headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ message: msg })
             });
             const d = await r.json();
-            chatLog.lastChild.textContent = d.reply || 'No reply.';
+            chatLog.lastChild.textContent = "Thanks for your message!";
         } catch{
             chatLog.lastChild.textContent = 'Error: Can’t reach AI.';
         }
