@@ -64,19 +64,21 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
   /* ---------- Load FAB container ---------- */
-  try {
-    const path = location.pathname.includes('/pages/') ? '../fabs.html' : 'fabs.html';
-    const res = await fetch(path);
-    const html = sanitize(await res.text());
-    const wrap = document.createElement('div');
-    wrap.innerHTML = html;
-    const fab = wrap.querySelector('#fab-container');
-    if (fab) {
-      const root = qs('#fab-root');
-      root && root.appendChild(fab);
+  if (!qs('#fab-container')) {
+    try {
+      const path = location.pathname.includes('/pages/') ? '../fabs.html' : 'fabs.html';
+      const res = await fetch(path);
+      const html = sanitize(await res.text());
+      const wrap = document.createElement('div');
+      wrap.innerHTML = html;
+      const fab = wrap.querySelector('#fab-container');
+      if (fab) {
+        const root = qs('#fab-root');
+        root && root.appendChild(fab);
+      }
+    } catch (err) {
+      console.error('Failed to load fabs.html', err);
     }
-  } catch (err) {
-    console.error('Failed to load fabs.html', err);
   }
 
   /* ---------- FABs & Modals ---------- */
