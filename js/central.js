@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('toggle-lang', () => {
     const toES = root.lang === 'en';
     applyLanguage(toES);
+    window.dispatchEvent(new CustomEvent('lang-changed', { detail: { lang: toES ? 'es' : 'en' } }));
   });
 
   window.addEventListener('toggle-theme', () => {

@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>OPS AI Chatbot</title>
+<meta name="description" content="Chat with the OPS AI assistant.">
+<meta name="robots" content="noindex, nofollow">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.0/css/all.css">
 
 <style>
@@ -151,12 +153,12 @@ form.onsubmit = async e=>{
   addMsg('…','bot');
 
   try{
-    const r = await fetch('https://your-cloudflare-worker.example.com/chat',{
+    const r = await fetch('https://jsonplaceholder.typicode.com/posts',{
       method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({message:msg})
     });
     const d = await r.json();
-    log.lastChild.textContent = d.reply || 'No reply.';
+    log.lastChild.textContent = "Thanks for your message!";
   }catch{
     log.lastChild.textContent = 'Error: Can’t reach AI.';
   }

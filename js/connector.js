@@ -29,7 +29,7 @@ function showFormModal(type) {
           <form>
             ${fields}
             <div class="modal-actions">
-              <button type="button" class="modal-btn" onclick="closeForm()">Cancel</button>
+              <button type="button" class="modal-btn cancel-btn">Cancel</button>
               <button type="submit" class="modal-btn">${lang === 'en' ? 'Submit' : 'Enviar'}</button>
             </div>
           </form>
@@ -42,6 +42,7 @@ function showFormModal(type) {
         if (fromService) window.location.href = '../index.html';
     };
     m.querySelector('.modal-close').onclick = closeForm;
+    m.querySelector('.cancel-btn').onclick = closeForm;
     m.onclick = e => { if (e.target === m) closeForm(); };
 }
 
